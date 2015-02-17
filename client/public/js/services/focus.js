@@ -1,0 +1,22 @@
+(function() {
+  angular.module("moedit.Services").factory("moedit.Focus", [
+    '$timeout', function($timeout) {
+      var self;
+      self = {
+        focus: function(selector) {
+          return $timeout(function() {
+            var element;
+            element = angular.element("" + selector);
+            if (element) {
+              return element.focus();
+            }
+          });
+        }
+      };
+      return self;
+    }
+  ]);
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcnZpY2VzL2ZvY3VzLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBLEVBQUEsT0FBTyxDQUFDLE1BQVIsQ0FBZ0IsaUJBQWhCLENBQWlDLENBQUMsT0FBbEMsQ0FBMkMsY0FBM0MsRUFBMEQ7SUFBRyxVQUFILEVBQWMsU0FBQyxRQUFELEdBQUE7QUFDdEUsVUFBQSxJQUFBO0FBQUEsTUFBQSxJQUFBLEdBQ0M7QUFBQSxRQUFBLEtBQUEsRUFBTyxTQUFDLFFBQUQsR0FBQTtpQkFLTixRQUFBLENBQVMsU0FBQSxHQUFBO0FBQ1IsZ0JBQUEsT0FBQTtBQUFBLFlBQUEsT0FBQSxHQUFVLE9BQU8sQ0FBQyxPQUFSLENBQWlCLEVBQUEsR0FBRSxRQUFuQixDQUFWLENBQUE7QUFDQSxZQUFBLElBQUcsT0FBSDtxQkFDQyxPQUFPLENBQUMsS0FBUixDQUFBLEVBREQ7YUFGUTtVQUFBLENBQVQsRUFMTTtRQUFBLENBQVA7T0FERCxDQUFBO2FBVUEsS0FYc0U7SUFBQSxDQUFkO0dBQTFELENBQUEsQ0FBQTtBQUFBIiwiZmlsZSI6InNlcnZpY2VzL2ZvY3VzLmpzIiwic291cmNlUm9vdCI6Ii9zb3VyY2UvIiwic291cmNlc0NvbnRlbnQiOlsiYW5ndWxhci5tb2R1bGUoXCJtb2VkaXQuU2VydmljZXNcIikuZmFjdG9yeSBcIm1vZWRpdC5Gb2N1c1wiLCBbICckdGltZW91dCcsICgkdGltZW91dCkgLT5cclxuXHRcdHNlbGYgPSBcclxuXHRcdFx0Zm9jdXM6IChzZWxlY3RvcikgLT5cclxuXHRcdFx0XHQjIHRpbWVvdXQgbWFrZXMgc3VyZSB0aGF0IGl0IGlzIGludm9rZWQgYWZ0ZXIgYW55IG90aGVyIGV2ZW50IGhhcyBiZWVuIHRyaWdnZXJlZC5cclxuXHRcdFx0XHQjIGUuZy4gY2xpY2sgZXZlbnRzIHRoYXQgbmVlZCB0byBydW4gYmVmb3JlIHRoZSBmb2N1cyBvclxyXG5cdFx0XHRcdCMgaW5wdXRzIGVsZW1lbnRzIHRoYXQgYXJlIGluIGEgZGlzYWJsZWQgc3RhdGUgYnV0IGFyZSBlbmFibGVkIHdoZW4gdGhvc2UgZXZlbnRzXHJcblx0XHRcdFx0IyBhcmUgdHJpZ2dlcmVkLlxyXG5cdFx0XHRcdCR0aW1lb3V0ICgpIC0+XHJcblx0XHRcdFx0XHRlbGVtZW50ID0gYW5ndWxhci5lbGVtZW50KFwiI3tzZWxlY3Rvcn1cIilcclxuXHRcdFx0XHRcdGlmIGVsZW1lbnQgXHJcblx0XHRcdFx0XHRcdGVsZW1lbnQuZm9jdXMoKVxyXG5cdFx0c2VsZlxyXG5dXHJcbiJdfQ==

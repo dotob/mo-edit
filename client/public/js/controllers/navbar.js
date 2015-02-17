@@ -1,0 +1,10 @@
+(function() {
+  var controllers;
+
+  controllers = angular.module('moedit.Controllers');
+
+  controllers.controller('navbarController', ['$rootScope', '$scope', '$log', '$state', function($rootScope, $scope, $log, $state) {}]);
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnRyb2xsZXJzL25hdmJhci5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQSxNQUFBLFdBQUE7O0FBQUEsRUFBQSxXQUFBLEdBQWMsT0FBTyxDQUFDLE1BQVIsQ0FBZ0Isb0JBQWhCLENBQWQsQ0FBQTs7QUFBQSxFQUNBLFdBQVcsQ0FBQyxVQUFaLENBQXdCLGtCQUF4QixFQUEyQyxDQUFFLFlBQUYsRUFBZ0IsUUFBaEIsRUFBMEIsTUFBMUIsRUFBa0MsUUFBbEMsRUFBMkMsU0FBQyxVQUFELEVBQWEsTUFBYixFQUFxQixJQUFyQixFQUEyQixNQUEzQixHQUFBLENBQTNDLENBQTNDLENBREEsQ0FBQTtBQUFBIiwiZmlsZSI6ImNvbnRyb2xsZXJzL25hdmJhci5qcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyIsInNvdXJjZXNDb250ZW50IjpbImNvbnRyb2xsZXJzID0gYW5ndWxhci5tb2R1bGUoJ21vZWRpdC5Db250cm9sbGVycycpXHJcbmNvbnRyb2xsZXJzLmNvbnRyb2xsZXIgJ25hdmJhckNvbnRyb2xsZXInLCBbJyRyb290U2NvcGUnLCAnJHNjb3BlJywgJyRsb2cnLCAnJHN0YXRlJywgKCRyb290U2NvcGUsICRzY29wZSwgJGxvZywgJHN0YXRlKSAtPlxyXG5dXHJcbiJdfQ==

@@ -1,0 +1,19 @@
+(function() {
+  var controllers;
+
+  controllers = angular.module('moedit.Controllers');
+
+  controllers.controller('loginController', [
+    '$scope', '$log', '$q', '$state', 'moedit.Socket', 'moedit.SweetAlert', 'moedit.Focus', function($scope, $log, $q, $state, Socket, SweetAlert, Focus) {
+      $scope.loading = false;
+      Focus.focus('#username');
+      return $scope.login = function() {
+        $scope.loading = true;
+        return $state.go('edit');
+      };
+    }
+  ]);
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnRyb2xsZXJzL2xvZ2luLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBLE1BQUEsV0FBQTs7QUFBQSxFQUFBLFdBQUEsR0FBYyxPQUFPLENBQUMsTUFBUixDQUFnQixvQkFBaEIsQ0FBZCxDQUFBOztBQUFBLEVBQ0EsV0FBVyxDQUFDLFVBQVosQ0FBd0IsaUJBQXhCLEVBQTBDO0lBQ3hDLFFBRHdDLEVBRXhDLE1BRndDLEVBR3hDLElBSHdDLEVBSXhDLFFBSndDLEVBS3hDLGVBTHdDLEVBTXhDLG1CQU53QyxFQU94QyxjQVB3QyxFQVF6QyxTQUFDLE1BQUQsRUFBUyxJQUFULEVBQWUsRUFBZixFQUFtQixNQUFuQixFQUEyQixNQUEzQixFQUFtQyxVQUFuQyxFQUErQyxLQUEvQyxHQUFBO0FBRUMsTUFBQSxNQUFNLENBQUMsT0FBUCxHQUFpQixLQUFqQixDQUFBO0FBQUEsTUFDQSxLQUFLLENBQUMsS0FBTixDQUFhLFdBQWIsQ0FEQSxDQUFBO2FBR0EsTUFBTSxDQUFDLEtBQVAsR0FBZSxTQUFBLEdBQUE7QUFDZCxRQUFBLE1BQU0sQ0FBQyxPQUFQLEdBQWlCLElBQWpCLENBQUE7ZUFDQSxNQUFNLENBQUMsRUFBUCxDQUFXLE1BQVgsRUFGYztNQUFBLEVBTGhCO0lBQUEsQ0FSeUM7R0FBMUMsQ0FEQSxDQUFBO0FBQUEiLCJmaWxlIjoiY29udHJvbGxlcnMvbG9naW4uanMiLCJzb3VyY2VSb290IjoiL3NvdXJjZS8iLCJzb3VyY2VzQ29udGVudCI6WyJjb250cm9sbGVycyA9IGFuZ3VsYXIubW9kdWxlKCdtb2VkaXQuQ29udHJvbGxlcnMnKVxyXG5jb250cm9sbGVycy5jb250cm9sbGVyICdsb2dpbkNvbnRyb2xsZXInLCBbXHJcblx0JyRzY29wZSdcclxuXHQnJGxvZydcclxuXHQnJHEnXHJcblx0JyRzdGF0ZSdcclxuXHQnbW9lZGl0LlNvY2tldCdcclxuXHQnbW9lZGl0LlN3ZWV0QWxlcnQnXHJcblx0J21vZWRpdC5Gb2N1cydcclxuXHQoJHNjb3BlLCAkbG9nLCAkcSwgJHN0YXRlLCBTb2NrZXQsIFN3ZWV0QWxlcnQsIEZvY3VzKSAtPlxyXG5cclxuXHRcdCRzY29wZS5sb2FkaW5nID0gZmFsc2VcclxuXHRcdEZvY3VzLmZvY3VzKCcjdXNlcm5hbWUnKVxyXG5cclxuXHRcdCRzY29wZS5sb2dpbiA9ICgpIC0+XHJcblx0XHRcdCRzY29wZS5sb2FkaW5nID0gdHJ1ZVxyXG5cdFx0XHQkc3RhdGUuZ28gJ2VkaXQnXHJcbl1cclxuIl19
