@@ -1,13 +1,10 @@
-# ===================================================================
-# ======================= configure app =============================
-# ===================================================================
 path         = require 'path'
 fs           = require 'fs'
 express      = require 'express'
 bodyParser   = require 'body-parser'
 http         = require 'http'
 serveStatic  = require 'serve-static' # use this because of mime type issues with express.static
-socketio     = require('socket.io')
+socketio     = require 'socket.io'
 
 # create web server instance
 app     = express()
@@ -25,7 +22,6 @@ io.on 'connection', (socket) =>
 port = 3030
 server.listen port, ->
   console.log "web server is listening on port #{port}"
-
 
 # Set the public folder as static assets
 app.use serveStatic path.join(__dirname, 'client', 'public')
