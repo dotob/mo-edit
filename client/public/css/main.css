@@ -36,6 +36,22 @@ body {
   left: 50%;
   margin-left: -250px;
 }
+#doc-info {
+  margin-top: 10px;
+}
+#doc-details {
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+#main-edit-area {
+  margin-top: 10px;
+}
+#outline {
+  background: #00f;
+}
+#sidebar {
+  background: #ff0;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;

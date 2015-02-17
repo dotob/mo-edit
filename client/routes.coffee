@@ -27,6 +27,7 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 app.run ['$rootScope', '$state', '$log', 'moedit.Auth', ($rootScope, $state, $log, Auth) ->
 	$rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
 		$log.info "statechange from: #{fromState.name} to: #{toState.name}"
+		return
 		if toState.name != 'login'
 			if !Auth.isLoggedIn()
 				$log.info "not logged in for that state. goto login."

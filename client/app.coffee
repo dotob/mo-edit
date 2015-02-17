@@ -8,6 +8,7 @@ app = angular.module('moedit.App', [
 	'MessageCenterModule'
   'moedit.Controllers'
   'moedit.Services'
+  'textAngular'
 #  'moedit.Logging'
 ])
 
