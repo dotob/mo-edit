@@ -9,6 +9,7 @@ app = angular.module('moedit.App', [
   'moedit.Controllers'
   'moedit.Services'
   'textAngular'
+  'restangular'
 #  'moedit.Logging'
 ])
 

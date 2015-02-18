@@ -7,7 +7,8 @@ controllers.controller 'editController', [
 	'moedit.Socket'
 	'moedit.SweetAlert'
 	'moedit.Focus'
-	($scope, $log, $q, $state, Socket, SweetAlert, Focus) ->
+	'Restangular'
+	($scope, $log, $q, $state, Socket, SweetAlert, Focus, Restangular) ->
 
 		$scope.todo = ""
 

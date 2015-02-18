@@ -19,7 +19,10 @@ server  = http.Server app
 
 mers = mers {uri:'mongodb://localhost/moedit'}
 models       = require('./server/models')(mers.mongoose)
+require('./server/fakedata')(models)
 app.use '/rest', mers.rest()
+
+
 
 io = socketio(server) #create web socket for pushing data to clients
 io.on 'connection', (socket) =>

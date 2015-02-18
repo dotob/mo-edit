@@ -27,4 +27,4 @@ module.exports = (mongoose) ->
 	Chapter = module.exports.Chapter = mongoose.model('chapter', ChapterSchema)
 	Document = module.exports.Document = mongoose.model('document', DocumentSchema)
 
-	
+	return {Author: Author, Chapter: Chapter, Document: Document}
