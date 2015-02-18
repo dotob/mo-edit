@@ -5,6 +5,8 @@ bodyParser   = require 'body-parser'
 http         = require 'http'
 serveStatic  = require 'serve-static' # use this because of mime type issues with express.static
 socketio     = require 'socket.io'
+mers         = require 'mers'
+
 
 # create web server instance
 app     = express()
@@ -14,6 +16,10 @@ app.use bodyParser.json()
 app.use bodyParser.urlencoded({ extended: false })
 
 server  = http.Server app
+
+mers = mers {uri:'mongodb://localhost/moedit'}
+models       = require('./server/models')(mers.mongoose)
+app.use '/rest', mers.rest()
 
 io = socketio(server) #create web socket for pushing data to clients
 io.on 'connection', (socket) =>
