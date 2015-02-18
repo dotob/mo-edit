@@ -1,8 +1,7 @@
 node_modules
 *.sublime-workspace
 log
-.idea
 dist
-f
-target
 client/public/bower
+client/public/js
+data

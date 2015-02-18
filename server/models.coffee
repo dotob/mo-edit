@@ -6,25 +6,37 @@ module.exports = (mongoose) ->
 		name: String
 		role: String
 
+	CommentSchema = new Schema
+		author: 
+			type: ObjectId
+			ref: AuthorSchema
+		text: String
+		created: Date
+
 	ChapterSchema = new Schema 
 		author: 
-			type: Schema.ObjectId
+			type: ObjectId
 			ref: AuthorSchema
 		title: String
 		content: String
 		lastChanged: Date
 		state: String
+		chapters: [ChapterSchema]
+		comments: [CommentSchema]
+		version: String
 
 	DocumentSchema = new Schema 
 		headAuthor:
-			type: Schema.ObjectId
+			type: ObjectId
 			ref: AuthorSchema
 		title: String
 		chapters: [ChapterSchema]
 		state: String
+		version: String
 
-	Author = module.exports.Author = mongoose.model('author', AuthorSchema)
-	Chapter = module.exports.Chapter = mongoose.model('chapter', ChapterSchema)
-	Document = module.exports.Document = mongoose.model('document', DocumentSchema)
+	Author = mongoose.model('author', AuthorSchema)
+	Comment = mongoose.model('comment', CommentSchema)
+	Chapter = mongoose.model('chapter', ChapterSchema)
+	Document = mongoose.model('document', DocumentSchema)
 
-	return {Author: Author, Chapter: Chapter, Document: Document}
+	{Author: Author, Comment: Comment, Chapter: Chapter, Document: Document}

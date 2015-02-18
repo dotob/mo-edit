@@ -17,9 +17,9 @@ app.use bodyParser.urlencoded({ extended: false })
 
 server  = http.Server app
 
-mers = mers {uri:'mongodb://localhost/moedit'}
-models       = require('./server/models')(mers.mongoose)
-require('./server/fakedata')(models)
+mers   = mers {uri:'mongodb://localhost/moedit'}
+models = require('./server/models')(mers.mongoose)
+require './server/fakedata'
 app.use '/rest', mers.rest()
 
 
