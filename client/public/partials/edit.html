@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-  <div id="doc-info" class="row">
+  <div id="doc-info" ng-hide="fullscreen" class="row">
     <div id="doc-number" class="col-md-2">
       <h1>{{ currentDocument.key }}</h1>
     </div>
@@ -11,34 +11,48 @@
     </div>
   </div>
   <div id="main-edit-area" class="row">
-    <div id="outline" class="col-md-2">
-      <h3>Gliederung</h3>
-      <ul ui-sortable="ui-sortable" ng-model="currentDocument.chapters">
-        <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter_selected' : chapter.selected}" class="chapter_info"> 
+    <div id="outline" ng-hide="fullscreen" class="col-md-2">
+      <div class="big-font">Gliederung</div>
+      <ul id="chapter-list" ui-sortable="ui-sortable" ng-model="currentDocument.chapters" class="list-unstyled">
+        <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : currentChapter.state=='ONGOING'}" class="chapter-info"> 
+          <div>{{ chapter.number }}</div>
           <div>{{ chapter.title }}</div>
           <div>{{ chapter.author.name }}</div>
-          <div>{{ chapter.state }}</div>
           <div>{{ chapter.version }}</div>
           <div>{{ chapter.lastChanged }}</div>
         </li>
       </ul>
+      <button ng-click="newChapter(currentDocument)" class="btn btn-default">Neues Kapitel</button>
     </div>
-    <div id="edit" class="col-md-8">
+    <div id="edit" ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}" class="no-gutter">
       <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]"></text-angular>
     </div>
-    <div id="sidebar" class="col-md-2">
-      <h3>Dokumenten-Info
-        <div>{{ currentDocument.headAuthor.name }}</div>
-        <div>{{ currentDocument.state }}</div>
-      </h3>
-      <h3>Kommentare</h3>
-      <ul ui-sortable="ui-sortable" ng-model="currentChapter.comments">
-        <li ng-repeat="chapter in currentChapter.comments"> 
-          <div>{{ chapter.author.name }}</div>
-          <div>{{ chapter.text }}</div>
-          <div>{{ chapter.created }}</div>
+    <div id="sidebar" ng-hide="fullscreen" class="col-md-2">
+      <div class="big-font">Informationen</div>
+      <div>{{ currentDocument.headAuthor.name }}</div>
+      <div data-toggle="buttons" class="btn-group">
+        <label type="button" ng-class="{'active' : currentChapter.state=='ONGOING'}" class="btn btn-warning">
+          <input type="radio"/>Offen
+        </label>
+        <label type="button" ng-class="{'active' : currentChapter.state=='FINISHED'}" class="btn btn-success">
+          <input type="radio"/>Fertig
+        </label>
+      </div>
+      <div>
+        <button ng-click="showPreview(currentDocument)" class="btn btn-default">Vorschau</button>
+      </div>
+      <div>
+        <button ng-click="downloadWord(currentDocument)" class="btn btn-default">Download</button>
+      </div>
+      <div class="big-font">Kommentare</div>
+      <ul id="comments-list" ui-sortable="ui-sortable" ng-model="currentChapter.comments" class="list-unstyled">
+        <li ng-repeat="comment in currentChapter.comments" class="comment-info"> 
+          <div>{{ comment.author.name }}</div>
+          <div>{{ comment.text }}</div>
+          <div>{{ comment.created }}</div>
         </li>
       </ul>
+      <button ng-click="newComment(currentChapter)" class="btn btn-default">Neuer Kommentar</button>
     </div>
   </div>
 </div>

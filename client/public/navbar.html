@@ -6,13 +6,5 @@
   <div class="navbar-header">
     <button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" class="navbar-toggle"><span class="sr-only">toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand">mo-edit</a>
   </div>
-  <!-- Collect the nav links, forms, and other content for toggling-->
-  <div id="navbar-collapse-1" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-      
-    </ul>
-    <ul ng-if="userLoggedIn" class="nav navbar-nav navbar-right">
-      <li><a ui-sref="logout"><span class="glyphicon glyphicon-off"></span>logout</a></li>
-    </ul>
-  </div>
+  <button ng-click="toggleFullscreen()" class="btn btn-default navbar-btn navbar-right">Fullscreen</button>
 </nav>

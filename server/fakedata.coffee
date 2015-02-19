@@ -41,6 +41,7 @@ models.Document.find {}, (err, doc) ->
 				for k in [0..10]
 					chapters.push 
 						author: _.sample authors
+						number: "#{k}"
 						title: chance.word()
 						content: chance.paragraph()
 						lastChanged: new Date()
@@ -61,5 +62,9 @@ models.Document.find {}, (err, doc) ->
 								chapters: _.sample chapters, 2
 								patient: patients[m]
 								state: _.sample ['ONGOING', 'FINISHED']
+						n = 1
+						for d in documents
+							d.number = "#{n}"
+							n += 1
 						save models.Document, documents, () ->
 							console.log "FINISHED INSERT FAKEDATA"

@@ -1,9 +1,8 @@
+.big-font
+	font-size: 24px
+
 #doc-info
 	margin-top: 10px
-
-
-//#doc-number
-
 
 #doc-details
 	border-left: 1px solid black
@@ -15,15 +14,31 @@
 outline = #A6A197
 sidebar = #F2E8DF
 
-#outline
-	background: outline
-	
-#sidebar
-	background: sidebar
-
-.chapter_info
+.chapter-info
 	padding: 3px
+	margin: 3px
+
+.chapter-selected 
+	margin-right: -15px
+
+.chapter-finished
+	border-left: 8px solid green
+
+.chapter-ongoing
+	border-left: 8px solid red
+
+#chapter-list li
+	background: #eee
+
+#chapter-list li:hover
+	background: darken(#eee, 10%)
 	
-.chapter_selected 
-	border: 1px solid black
+#comments-list li
+	background: #eee
+
+#comments-list li:hover
+	background: darken(#eee, 10%)
 	
+.comment-info
+	padding: 5px
+	margin: 3px

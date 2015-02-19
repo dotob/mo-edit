@@ -21,6 +21,7 @@ module.exports = (mongoose) ->
 		author: 
 			type: ObjectId
 			ref: AuthorSchema
+		number: String
 		title: String
 		content: String
 		lastChanged: Date

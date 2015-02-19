@@ -24,9 +24,9 @@ body {
 .online {
   background-color: #008000;
 }
-.no-gutter > [class*='col-'] {
-  padding-right: 0;
-  padding-left: 0;
+.no-gutter {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 #mc-messages-wrapper {
   position: absolute;
@@ -35,6 +35,9 @@ body {
   width: 700px;
   left: 50%;
   margin-left: -250px;
+}
+.big-font {
+  font-size: 24px;
 }
 #doc-info {
   margin-top: 10px;
@@ -46,17 +49,34 @@ body {
 #main-edit-area {
   margin-top: 10px;
 }
-#outline {
-  background: #a6a197;
-}
-#sidebar {
-  background: #f2e8df;
-}
-.chapter_info {
+.chapter-info {
   padding: 3px;
+  margin: 3px;
 }
-.chapter_selected {
-  border: 1px solid #000;
+.chapter-selected {
+  margin-right: -15px;
+}
+.chapter-finished {
+  border-left: 8px solid #008000;
+}
+.chapter-ongoing {
+  border-left: 8px solid #f00;
+}
+#chapter-list li {
+  background: #eee;
+}
+#chapter-list li:hover {
+  background: #d6d6d6;
+}
+#comments-list li {
+  background: #eee;
+}
+#comments-list li:hover {
+  background: #d6d6d6;
+}
+.comment-info {
+  padding: 5px;
+  margin: 3px;
 }
 .form-signin {
   max-width: 330px;

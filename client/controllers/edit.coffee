@@ -10,13 +10,9 @@ controllers.controller 'editController', [
 	'moedit.Data'
 	($scope, $log, $q, $state, Socket, SweetAlert, Focus, Data) ->
 
-		$log.info 'editController hello world'
-		Data.documents().then (documents) ->
-			console.table documents
-			$scope.documents = documents
-			$scope.currentDocument = documents[0]
-
 		$scope.selectChapter = (chapter) ->
+			if $scope.chapterWatch?
+				$scope.chapterWatch() # remove watch
 			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
 			$log.debug chapter.content
 			$scope.currentChapter = chapter
@@ -25,6 +21,22 @@ controllers.controller 'editController', [
 					c.selected = true
 				else
 					c.selected = false
+			$scope.chapterWatch = $scope.$watch 'currentChapter.content', (val) ->
+				console.log 'changed'
+
+		$scope.newComment = (chapter) ->
+			# TODO
+		$scope.newChapter = (document) ->
+			# TODO
+		$scope.showPreview = (document) ->
+			# TODO: goto /preview/:docid
+		$scope.downloadWord = (document) ->
+			# TODO: goto /download/:docid
+
+		Data.documents().then (documents) ->
+			$scope.documents = documents
+			$scope.currentDocument = documents[0]
+			$scope.selectChapter($scope.currentDocument.chapters[0])
 			
 
 ]
