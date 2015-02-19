@@ -52,6 +52,9 @@ body {
 #sidebar {
   background: #f2e8df;
 }
+.chapter_info {
+  padding: 3px;
+}
 .chapter_selected {
   border: 1px solid #000;
 }
