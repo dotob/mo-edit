@@ -47,10 +47,13 @@ body {
   margin-top: 10px;
 }
 #outline {
-  background: #00f;
+  background: #a6a197;
 }
 #sidebar {
-  background: #ff0;
+  background: #f2e8df;
+}
+.chapter_selected {
+  border: 1px solid #000;
 }
 .form-signin {
   max-width: 330px;

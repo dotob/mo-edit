@@ -25,6 +25,7 @@ models.Document.find {}, (err, doc) ->
 		comments = []
 		chapters = []
 		documents = []
+		patients = []
 
 		for i in [0..5]
 			authors.push 
@@ -48,10 +49,17 @@ models.Document.find {}, (err, doc) ->
 						version: 1
 				save models.Chapter, chapters, () ->
 					for l in [0..3]
-						documents.push 
-							headAuthor: _.sample authors
-							title: chance.word()
-							chapters: _.sample chapters, 2
-							state: _.sample ['ONGOING', 'FINISHED']
-					save models.Document, documents, () ->
-						console.log "FINISHED INSERT FAKEDATA"
+						patients.push 
+							name: chance.name()
+							dob: chance.birthday()
+					save models.Patient, patients, () ->
+						for m in [0..3]
+							documents.push 
+								key: "#{chance.integer({min: 100000, max: 999999})}"
+								headAuthor: _.sample authors
+								title: chance.word()
+								chapters: _.sample chapters, 2
+								patient: patients[m]
+								state: _.sample ['ONGOING', 'FINISHED']
+						save models.Document, documents, () ->
+							console.log "FINISHED INSERT FAKEDATA"

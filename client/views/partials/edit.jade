@@ -1,22 +1,36 @@
 .container-fluid
-  #doc-info.row
-    #doc-number.col-md-2
-      h1 12345678
+	#doc-info.row
+		#doc-number.col-md-2
+			h1 {{ currentDocument.key }}
 
-    #doc-details.col-md-10
-      h2 Herr Jolien Pöge
-      h3 geb. 01.08.2007 (7 Jahre)
+		#doc-details.col-md-10
+			h2 {{ currentDocument.patient.name }}
+			h3 geb. {{ currentDocument.patient.dob }} (x Jahre)
 
-      h2 Fall Dokumentation
+			h2 {{ currentDocument.title }}
 
-  #main-edit-area.row
-    #outline.col-md-2
-      h3 Gliederung
+	#main-edit-area.row
+		#outline.col-md-2
+			h3 Gliederung
+			ul(ui-sortable ng-model="currentDocument.chapters")
+				li.chapter_info(ng-repeat="chapter in currentDocument.chapters", ng-click="selectChapter(chapter)", ng-class="{'chapter_selected' : chapter.selected}") 
+					div {{ chapter.title }}
+					div {{ chapter.author.name }}
+					div {{ chapter.state }}
+					div {{ chapter.version }}
+					div {{ chapter.lastChanged }}
 
-    #edit.col-md-8
-      text-angular(ng-model="chapter", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]")
+		#edit.col-md-8
+			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]")
 
-    #sidebar.col-md-2
-      h3 Details
+		#sidebar.col-md-2
+			h3 Dokumenten-Info
+				div {{ currentDocument.headAuthor.name }}
+				div {{ currentDocument.state }}
 
-      h3 Kommentare
+			h3 Kommentare
+			ul(ui-sortable ng-model="currentChapter.comments")
+				li(ng-repeat="chapter in currentChapter.comments") 
+					div {{ chapter.author.name }}
+					div {{ chapter.text }}
+					div {{ chapter.created }}

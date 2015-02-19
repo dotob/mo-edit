@@ -10,6 +10,7 @@ app = angular.module('moedit.App', [
   'moedit.Services'
   'textAngular'
   'restangular'
+  'ui.sortable'
 #  'moedit.Logging'
 ])
 

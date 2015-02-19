@@ -2,6 +2,10 @@ module.exports = (mongoose) ->
 	Schema   = mongoose.Schema
 	ObjectId = mongoose.Schema.ObjectId
 
+	PatientSchema = new Schema
+		name: String
+		dob: Date
+
 	AuthorSchema = new Schema
 		name: String
 		role: String
@@ -26,16 +30,21 @@ module.exports = (mongoose) ->
 		version: String
 
 	DocumentSchema = new Schema 
+		key: String
 		headAuthor:
 			type: ObjectId
 			ref: AuthorSchema
+		patient:
+			type: ObjectId
+			ref: PatientSchema
 		title: String
 		chapters: [ChapterSchema]
 		state: String
 
+	Patient = mongoose.model('patient', PatientSchema)
 	Author = mongoose.model('author', AuthorSchema)
 	Comment = mongoose.model('comment', CommentSchema)
 	Chapter = mongoose.model('chapter', ChapterSchema)
 	Document = mongoose.model('document', DocumentSchema)
 
-	{Author: Author, Comment: Comment, Chapter: Chapter, Document: Document}
+	{Author: Author, Comment: Comment, Chapter: Chapter, Document: Document, Patient: Patient}
