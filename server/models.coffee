@@ -32,7 +32,6 @@ module.exports = (mongoose) ->
 		title: String
 		chapters: [ChapterSchema]
 		state: String
-		version: String
 
 	Author = mongoose.model('author', AuthorSchema)
 	Comment = mongoose.model('comment', CommentSchema)
