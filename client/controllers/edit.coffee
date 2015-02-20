@@ -4,11 +4,12 @@ controllers.controller 'editController', [
 	'$log'
 	'$q'
 	'$state'
+	'$window'
 	'moedit.Socket'
 	'moedit.SweetAlert'
 	'moedit.Focus'
 	'moedit.Data'
-	($scope, $log, $q, $state, Socket, SweetAlert, Focus, Data) ->
+	($scope, $log, $q, $state, $window, Socket, SweetAlert, Focus, Data) ->
 
 		$scope.selectChapter = (chapter) ->
 			if $scope.chapterWatch?
@@ -25,13 +26,16 @@ controllers.controller 'editController', [
 				console.log 'changed'
 
 		$scope.newComment = (chapter) ->
-			# TODO
+			SweetAlert.info 'kommt noch'
+
 		$scope.newChapter = (document) ->
-			# TODO
+			SweetAlert.info 'kommt noch'
+
 		$scope.showPreview = (document) ->
-			# TODO: goto /preview/:docid
+			$window.open "/preview/#{document._id}"
+
 		$scope.downloadWord = (document) ->
-			# TODO: goto /download/:docid
+			$window.open "/download/word/#{document._id}"
 
 		Data.documents().then (documents) ->
 			$scope.documents = documents
