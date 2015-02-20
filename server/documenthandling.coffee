@@ -8,7 +8,6 @@ DocumentHandling = class DocumentHandling
 
 	createPreview: (docid) ->
 		deferred = q.defer()
-		console.log "createPreview"
 		@getDocument(docid).then (doc) =>
 			h = @createHtml(doc)
 			deferred.resolve h
@@ -19,7 +18,6 @@ DocumentHandling = class DocumentHandling
 	createWord: (docid) ->
 		deferred = q.defer()
 		@getDocument(docid).then (doc) =>
-			console.log "got doc"
 			html = @createHtml doc    
 			pandoc.createWord(html, docid).then (outname) ->
 				deferred.resolve outname
@@ -34,7 +32,6 @@ DocumentHandling = class DocumentHandling
 		for chapter in doc.chapters
 			html += "<h2>#{chapter.title}</h2>\n\n"
 			html += "<p>#{chapter.content}</p>\n\n"
-		console.log "html: #{html}"
 		html
 		
 	getDocument: (docid) ->

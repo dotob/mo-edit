@@ -45,7 +45,7 @@ app.use serveStatic path.join(__dirname, 'client', 'public')
 
 sendToClient = (req, res) ->
 	console.log "requested #{req.url}"
-	res.sendFile path.join(__dirname, 'client', 'public', 'index.html')
+	res.sendFile path.join __dirname, 'client', 'public', 'index.html'
 # basic route
 app.get "/edit", sendToClient
 app.get "/login", sendToClient
@@ -60,13 +60,11 @@ app.post "/logger", (req, res) ->
 app.get "/preview/:docid", (req, res) ->
 	console.log "requested preview doc #{req.params.docid}"
 	console.log documentHandling.createPreview(req.params.docid).then (h) ->
-		console.log "promised: #{h}"
-		res.send(h)
+		res.send h
 
 # download route
 app.get "/download/word/:docid", (req, res) ->
 	console.log "requested download doc #{req.params.docid}"
 	documentHandling.createWord(req.params.docid).then (filename) ->
-		console.log "doc created: #{filename}"
 		res.sendFile path.join(__dirname, filename)
 	

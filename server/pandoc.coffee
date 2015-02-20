@@ -1,6 +1,8 @@
-pdc = require 'pdc'
-fs = require 'fs'
-q = require 'q'
+pdc  = require 'pdc'
+fs   = require 'fs'
+q    = require 'q'
+path = require 'path'
+
 
 Pandoc = class Pandoc
 	test: () ->
@@ -12,7 +14,7 @@ Pandoc = class Pandoc
 
 	createWord: (html, outname) ->
 		deferred = q.defer()
-		filename = "docs/#{outname}.docx"
+		filename = path.join 'docs', "#{outname}.docx"
 		pdc html, 'html', 'docx', ['-o',  filename, '--reference-docx', 'server/template/template.docx'],  (err, result) ->
 			if err
 				deferred.reject err
