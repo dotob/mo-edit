@@ -1,6 +1,6 @@
-#socket-io-connection-status.animated.fadeInDown(ng-controller="socketStatusController", ng-class="{ online: socketIoConnected, offline: !socketIoConnected}", ng-cloak)
+#socket-io-connection-status(ng-controller="socketStatusController", ng-class="{ online: socketIoConnected, offline: !socketIoConnected}", ng-cloak)
 
-nav#mainnav.navbar.navbar-inverse.navbar-fixed-top.animated.fadeInDown(role='navigation', ng-controller="navbarController", ng-cloak)
+nav#mainnav.navbar.navbar-inverse.navbar-fixed-top(role='navigation', ng-controller="navbarController", ng-cloak)
 	.container-fluid
 	// Brand and toggle get grouped for better mobile display
 	.navbar-header
@@ -10,5 +10,4 @@ nav#mainnav.navbar.navbar-inverse.navbar-fixed-top.animated.fadeInDown(role='nav
 			span.icon-bar
 			span.icon-bar
 		a.navbar-brand mo-edit
-	button.btn.btn-default.navbar-btn.navbar-right(ng-click="toggleFullscreen()") Fullscreen
-
+	button#fullscreen.btn.btn-default.navbar-btn.navbar-right(ng-click="toggleFullscreen()") {{ fullscreenText }}

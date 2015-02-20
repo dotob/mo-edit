@@ -49,6 +49,13 @@ body {
 #main-edit-area {
   margin-top: 10px;
 }
+.sidebar-button {
+  width: 100%;
+  margin: 5px;
+}
+.state-radio {
+  width: 50%;
+}
 .chapter-info {
   padding: 3px;
   margin: 3px;
@@ -169,8 +176,8 @@ input[type="checkbox"] {
   margin: 0 5px 0 0;
   box-shadow: none;
 }
-#autoUpdateForm {
-  padding-top: 2px;
+#fullscreen {
+  margin-right: 10px;
 }
 .navbar-brand-small {
   float: left;

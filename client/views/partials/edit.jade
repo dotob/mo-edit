@@ -19,7 +19,7 @@
 					div {{ chapter.author.name }}
 					div {{ chapter.version }}
 					div {{ chapter.lastChanged }}
-			button.btn.btn-default(ng-click="newChapter(currentDocument)") Neues Kapitel
+			button.sidebar-button.btn.btn-default(ng-click="newChapter(currentDocument)") Neues Kapitel
 
 		#edit.no-gutter(ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}")
 			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]")
@@ -27,17 +27,17 @@
 		#sidebar.col-md-2(ng-hide="fullscreen")
 			.big-font Informationen
 			div {{ currentDocument.headAuthor.name }}
-			div.btn-group(data-toggle="buttons")
-				label.btn.btn-warning(type="button", ng-class="{'active' : currentChapter.state=='ONGOING'}")
+			div.sidebar-button.btn-group(data-toggle="buttons")
+				label.state-radio.btn.btn-warning(type="button", ng-class="{'active' : currentChapter.state=='ONGOING'}")
 					input(type="radio")
 					| Offen
-				label.btn.btn-success(type="button", ng-class="{'active' : currentChapter.state=='FINISHED'}")
+				label.state-radio.btn.btn-success(type="button", ng-class="{'active' : currentChapter.state=='FINISHED'}")
 					input(type="radio")
 					| Fertig
 			div
-				button.btn.btn-default(ng-click="showPreview(currentDocument)") Vorschau
+				button.sidebar-button.btn.btn-default(ng-click="showPreview(currentDocument)") Vorschau
 			div
-				button.btn.btn-default(ng-click="downloadWord(currentDocument)") Download
+				button.sidebar-button.btn.btn-default(ng-click="downloadWord(currentDocument)") Download
 
 			.big-font Kommentare
 			ul#comments-list.list-unstyled(ui-sortable ng-model="currentChapter.comments")
@@ -45,5 +45,5 @@
 					div {{ comment.author.name }}
 					div {{ comment.text }}
 					div {{ comment.created }}
-			button.btn.btn-default(ng-click="newComment(currentChapter)") Neuer Kommentar
+			button.sidebar-button.btn.btn-default(ng-click="newComment(currentChapter)") Neuer Kommentar
 

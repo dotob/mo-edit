@@ -26,20 +26,30 @@ app.use '/api', mers.rest()
 
 io = socketio(server) #create web socket for pushing data to clients
 io.on 'connection', (socket) =>
-  console.log "#{io.sockets.sockets.length} socket(s) connected"
+	console.log "#{io.sockets.sockets.length} socket(s) connected"
 
 port = 3030
 server.listen port, ->
-  console.log "web server is listening on port #{port}"
+	console.log "web server is listening on port #{port}"
 
 # Set the public folder as static assets
 app.use serveStatic path.join(__dirname, 'client', 'public')
 
-# basic route
-app.get "*", (req, res) ->
+sendToClient = (req, res) ->
 	console.log "requested #{req.url}"
 	res.sendFile path.join(__dirname, 'client', 'public', 'index.html')
+# basic route
+app.get "/edit", sendToClient
+app.get "/login", sendToClient
+	
 
 # logger route, for saving logmessages from client
 app.post "/logger", (req, res) ->
 	console.log JSON.stringify(req.body)
+	res.sendStatus(200)
+
+# preview route
+app.get "/preview/:docid", (req, res) ->
+	console.log "requested doc #{req.params.docid}"
+	res.sendStatus(200)
+	

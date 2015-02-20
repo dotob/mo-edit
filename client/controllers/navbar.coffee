@@ -5,8 +5,12 @@ controllers.controller 'navbarController', [
 	'$log'
 	'$state'
 	($rootScope, $scope, $log, $state) ->
-
-		$rootScope.toggleFullscreen = () ->
+		
+		$rootScope.fullscreen = false
+		$rootScope.fullscreenText = 'Fullscreen an'
+			
+		$scope.toggleFullscreen = () ->
 			$rootScope.fullscreen = !$rootScope.fullscreen
-			$log.info "set fullscreen to #{$rootScope.fullscreen}"
+			$rootScope.fullscreenText = if $rootScope.fullscreen then 'Fullscreen aus' else 'Fullscreen an'
+			$log.info "set fullscreen to #{$rootScope.fullscreen} with #{$rootScope.fullscreenText}"
 ]
