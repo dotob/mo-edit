@@ -13,12 +13,17 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 			url: "/logout"
 
 		.state 'edit',
-			url: "/edit"
+			url: "/edit/:docid"
 			templateUrl: 'partials/edit.html'
 			controller: 'editController'
 
+		.state 'list',
+			url: "/list"
+			templateUrl: 'partials/list.html'
+			controller: 'listController'
 
-	$urlRouterProvider.otherwise('/login');
+
+	$urlRouterProvider.otherwise('/list');
 
 	$locationProvider.html5Mode(true)
 ]

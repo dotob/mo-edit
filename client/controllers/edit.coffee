@@ -4,12 +4,13 @@ controllers.controller 'editController', [
 	'$log'
 	'$q'
 	'$state'
+	'$stateParams'
 	'$window'
 	'moedit.Socket'
 	'moedit.SweetAlert'
 	'moedit.Focus'
 	'moedit.Data'
-	($scope, $log, $q, $state, $window, Socket, SweetAlert, Focus, Data) ->
+	($scope, $log, $q, $state, $stateParams, $window, Socket, SweetAlert, Focus, Data) ->
 
 		$scope.selectChapter = (chapter) ->
 			if $scope.chapterWatch?
@@ -23,6 +24,7 @@ controllers.controller 'editController', [
 				else
 					c.selected = false
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', (val) ->
+				$scope.currentChapter.lastChanged = new Date()
 				console.log 'changed'
 
 		$scope.newComment = (chapter) ->
@@ -37,9 +39,13 @@ controllers.controller 'editController', [
 		$scope.downloadWord = (document) ->
 			$window.open "/download/word/#{document._id}"
 
-		Data.documents().then (documents) ->
-			$scope.documents = documents
-			$scope.currentDocument = documents[0]
+		$scope.saveDocument = (document) ->
+			Data.saveDocument document
+
+		console.dir $stateParams
+		Data.document($stateParams.docid).then (document) ->
+			console.dir document
+			$scope.currentDocument = document
 			$scope.selectChapter($scope.currentDocument.chapters[0])
 			
 

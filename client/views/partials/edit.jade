@@ -13,7 +13,7 @@
 		#outline.col-md-2(ng-hide="fullscreen")
 			.big-font Gliederung
 			ul#chapter-list.list-unstyled(ui-sortable ng-model="currentDocument.chapters")
-				li.chapter-info(ng-repeat="chapter in currentDocument.chapters", ng-click="selectChapter(chapter)", ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : currentChapter.state=='ONGOING'}") 
+				li.chapter-info(ng-repeat="chapter in currentDocument.chapters", ng-click="selectChapter(chapter)", ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : chapter.state=='ONGOING'}") 
 					div {{ chapter.number }}
 					div {{ chapter.title }}
 					div {{ chapter.author.name }}
@@ -38,6 +38,8 @@
 				button.sidebar-button.btn.btn-default(ng-click="showPreview(currentDocument)") Vorschau
 			div
 				button.sidebar-button.btn.btn-default(ng-click="downloadWord(currentDocument)") Download
+			div
+				button.sidebar-button.btn.btn-default(ng-click="saveDocument(currentDocument)") Save
 
 			.big-font Kommentare
 			ul#comments-list.list-unstyled(ui-sortable ng-model="currentChapter.comments")

@@ -14,7 +14,7 @@
     <div id="outline" ng-hide="fullscreen" class="col-md-2">
       <div class="big-font">Gliederung</div>
       <ul id="chapter-list" ui-sortable="ui-sortable" ng-model="currentDocument.chapters" class="list-unstyled">
-        <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : currentChapter.state=='ONGOING'}" class="chapter-info"> 
+        <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : chapter.state=='ONGOING'}" class="chapter-info"> 
           <div>{{ chapter.number }}</div>
           <div>{{ chapter.title }}</div>
           <div>{{ chapter.author.name }}</div>
@@ -43,6 +43,9 @@
       </div>
       <div>
         <button ng-click="downloadWord(currentDocument)" class="sidebar-button btn btn-default">Download</button>
+      </div>
+      <div>
+        <button ng-click="saveDocument(currentDocument)" class="sidebar-button btn btn-default">Save</button>
       </div>
       <div class="big-font">Kommentare</div>
       <ul id="comments-list" ui-sortable="ui-sortable" ng-model="currentChapter.comments" class="list-unstyled">
