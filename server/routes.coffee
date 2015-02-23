@@ -48,8 +48,10 @@ module.exports = (app, models, basedir) ->
 		models.Document.findByIdAndUpdate req.params.docid, req.body, (err, dbdoc) ->
 			if err?
 				console.log "error while saving: #{err}"
+				res.sendStatus(500)
 			else
 				console.log "saved doc #{req.params.docid} successfully"
+				res.sendStatus(200)
 
 	app.delete '/documents/:docid', (req, res) ->
 		console.log "delete doc #{req.params.docid}"
