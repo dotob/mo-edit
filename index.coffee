@@ -22,9 +22,6 @@ models = require('./server/models')(m)
 fakeData = require './server/fakedata'
 fakeData(models)
 
-# init documenthandling
-DocumentHandling = require './server/documenthandling'
-documentHandling = new DocumentHandling(models)
 
 io = socketio(server) #create web socket for pushing data to clients
 io.on 'connection', (socket) =>

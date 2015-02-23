@@ -2,6 +2,11 @@ path         = require 'path'
 fs           = require 'fs'
 
 module.exports = (app, models, basedir) ->
+
+	# init documenthandling
+	DocumentHandling = require './documenthandling'
+	documentHandling = new DocumentHandling(models)
+
 	sendToClient = (req, res) ->
 		console.log "requested #{req.url}"
 		res.sendFile path.join basedir, 'client', 'public', 'index.html'
