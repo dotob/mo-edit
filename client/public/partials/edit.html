@@ -14,7 +14,12 @@
     <div id="outline" ng-hide="fullscreen" class="col-md-2">
       <div class="big-font">Gliederung</div>
       <ul id="chapter-list" ui-sortable="ui-sortable" ng-model="currentDocument.chapters" class="list-unstyled">
+<<<<<<< HEAD
         <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : currentChapter.state=='ONGOING'}" class="chapter-info"> 
+=======
+        <li ng-repeat="chapter in currentDocument.chapters" ng-click="selectChapter(chapter)" ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : chapter.state=='ONGOING'}" class="chapter-info"> 
+          <div>{{ chapter.number }}</div>
+>>>>>>> f093c4c02ddc6981e4d50025eaf82ee2ee3e5785
           <div>{{ chapter.title }}</div>
           <div>{{ chapter.author }}</div>
           <div>{{ chapter.lastChanged | fromNow }}</div>

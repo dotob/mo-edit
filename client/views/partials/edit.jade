@@ -13,7 +13,7 @@
 		#outline.col-md-2(ng-hide="fullscreen")
 			.big-font Gliederung
 			ul#chapter-list.list-unstyled(ui-sortable ng-model="currentDocument.chapters")
-				li.chapter-info(ng-repeat="chapter in currentDocument.chapters", ng-click="selectChapter(chapter)", ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : currentChapter.state=='ONGOING'}") 
+				li.chapter-info(ng-repeat="chapter in currentDocument.chapters", ng-click="selectChapter(chapter)", ng-class="{'chapter-selected' : chapter.selected, 'chapter-finished' : chapter.state=='FINISHED', 'chapter-ongoing' : chapter.state=='ONGOING'}") 
 					div {{ chapter.title }}
 					div {{ chapter.author }}
 					//- div {{ chapter.version }}

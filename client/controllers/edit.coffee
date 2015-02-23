@@ -4,12 +4,21 @@ controllers.controller 'editController', [
 	'$log'
 	'$q'
 	'$state'
+	'$stateParams'
 	'$window'
 	'moedit.Socket'
 	'moedit.SweetAlert'
 	'moedit.Focus'
 	'moedit.Data'
-	($scope, $log, $q, $state, $window, Socket, SweetAlert, Focus, Data) ->
+	'messageCenterService'
+	($scope, $log, $q, $state, $stateParams, $window, Socket, SweetAlert, Focus, Data, messageCenterService) ->
+
+		# autosave
+		autoSaveCurrentDocument = () ->
+			$log.debug "autosave"
+			$scope.saveDocument($scope.currentDocument, "Automatisch gespeichert")
+		
+		autoSave = _.debounce autoSaveCurrentDocument, 5000
 
 		$scope.selectChapter = (chapter) ->
 			if $scope.chapterWatch?
@@ -23,8 +32,9 @@ controllers.controller 'editController', [
 				else
 					c.selected = false
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', (val) ->
+				$log.debug "changed"
 				$scope.currentChapter.lastChanged = new Date()
-				console.log 'changed'
+				autoSave()
 
 		$scope.newComment = (chapter) ->
 			SweetAlert.info 'kommt noch'
@@ -38,15 +48,15 @@ controllers.controller 'editController', [
 		$scope.downloadWord = (document) ->
 			$window.open "/download/word/#{document._id}"
 
-		$scope.saveDocument = (document) ->
-			console.log "save"
+		$scope.saveDocument = (document, msg = "Gutachten erfolgreich gespeichert") ->
+			Data.saveDocument(document).then (response) ->
+				if response.status != 200
+					messageCenterService.add('danger', msg, {html: true});
+				else
+					messageCenterService.add('success', msg, {timeout: 2000, html: true});
+
+		Data.document($stateParams.docid).then (document) ->
 			console.dir document
-			Data.saveDocument(document)
-
-		Data.documents().then (documents) ->
-			$scope.documents = documents
-			$scope.currentDocument = documents[0]
+			$scope.currentDocument = document
 			$scope.selectChapter($scope.currentDocument.chapters[0])
-			
-
 ]

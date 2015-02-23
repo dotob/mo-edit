@@ -1,32 +1,28 @@
-angular.module('moedit.App').config ['RestangularProvider', (RestangularProvider) ->
-	RestangularProvider.setBaseUrl '/api'
-	RestangularProvider.setRestangularFields { id: "_id"}
-	# add a response intereceptor
-	RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
-		extractedData = undefined
-		# .. to look for getList operations
-		if operation == 'getList'
-			extractedData = data.payload
-		else
-			extractedData = data.payload
-		extractedData
-]
-
 angular.module('moedit.Services').factory 'moedit.Data', [ 
 	'$rootScope'
 	'$log'
-	'Restangular'
-	($rootScope, $log, Restangular) ->
-
-		baseDocuments = Restangular.all('document')
+	'$http'
+	'$q'
+	($rootScope, $log, $http, $q) ->
 
 		self =
 			documents: ->
-				baseDocuments.getList()
-				
-			saveDocument: (document) ->
-				document.put()
-				console.log "put document"
+				deferred = $q.defer()
+				$http.get('/documents').then (response) ->
+					deferred.resolve response.data
+				deferred.promise
+			
+			document: (docid) ->
+				deferred = $q.defer()
+				$http.get("/documents/#{docid}").then (response) ->
+					deferred.resolve response.data
+				deferred.promise
+			
+			saveDocument: (doc) ->
+				$http.put "/documents/#{doc._id}", doc
+
+			deleteDocument: (doc) ->
+				$http.delete "/documents/#{doc._id}"
 
 			authors: ->
 
