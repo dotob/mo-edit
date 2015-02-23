@@ -60,6 +60,7 @@ app.post "/logger", (req, res) ->
 app.get "/preview/:docid", (req, res) ->
 	console.log "requested preview doc #{req.params.docid}"
 	console.log documentHandling.createPreview(req.params.docid).then (h) ->
+		console.log "send preview to client"
 		res.send h
 
 # download route

@@ -2,7 +2,7 @@
 <html ng-app="moedit.App">
   <head>
     <base href="/">
-    <title>case management - mo-edit</title>
+    <title>mo-edit</title>
     <!-- files injected via "gulp inject" come from bower-->
     <link rel="stylesheet" href="/bower/sweetalert/lib/sweet-alert.css">
     <link rel="stylesheet" href="/bower/animate-css/animate.css">
@@ -42,9 +42,11 @@
     <script src="/bower/stacktrace/stacktrace.js"></script>
     <script src="/bower/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower/rangy/rangy-core.min.js"></script>
-    <script src="/bower/rangy/rangy-cssclassapplier.min.js"></script>
+    <script src="/bower/rangy/rangy-classapplier.min.js"></script>
+    <script src="/bower/rangy/rangy-highlighter.min.js"></script>
     <script src="/bower/rangy/rangy-selectionsaverestore.min.js"></script>
     <script src="/bower/rangy/rangy-serializer.min.js"></script>
+    <script src="/bower/rangy/rangy-textrange.min.js"></script>
     <script src="/bower/jquery-ui/jquery-ui.js"></script>
     <script src="/bower/angular/angular.js"></script>
     <script src="/bower/ui-router/release/angular-ui-router.js"></script>
@@ -76,5 +78,7 @@
     <script src="/js/services/logging.js"></script>
     <script src="/js/services/socketio.js"></script>
     <script src="/js/services/sweetalert.js"></script>
+    <!-- angular localized-->
+    <script src="/bower/angular-i18n/angular-locale_de-de.js"></script>
   </body>
 </html>

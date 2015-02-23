@@ -2,7 +2,7 @@ doctype html
 html(ng-app="moedit.App")
 	head
 		base(href="/")
-		title case management - mo-edit
+		title mo-edit
 
 
 		// files injected via "gulp inject" come from bower
@@ -46,9 +46,11 @@ html(ng-app="moedit.App")
 		script(src="/bower/stacktrace/stacktrace.js")
 		script(src="/bower/bootstrap/dist/js/bootstrap.js")
 		script(src="/bower/rangy/rangy-core.min.js")
-		script(src="/bower/rangy/rangy-cssclassapplier.min.js")
+		script(src="/bower/rangy/rangy-classapplier.min.js")
+		script(src="/bower/rangy/rangy-highlighter.min.js")
 		script(src="/bower/rangy/rangy-selectionsaverestore.min.js")
 		script(src="/bower/rangy/rangy-serializer.min.js")
+		script(src="/bower/rangy/rangy-textrange.min.js")
 		script(src="/bower/jquery-ui/jquery-ui.js")
 		script(src="/bower/angular/angular.js")
 		script(src="/bower/ui-router/release/angular-ui-router.js")
@@ -84,3 +86,6 @@ html(ng-app="moedit.App")
 		script(src="/js/services/socketio.js")
 		script(src="/js/services/sweetalert.js")
 		//- endinject
+
+		// angular localized
+		script(src="/bower/angular-i18n/angular-locale_de-de.js")

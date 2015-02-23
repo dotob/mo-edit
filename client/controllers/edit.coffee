@@ -23,6 +23,7 @@ controllers.controller 'editController', [
 				else
 					c.selected = false
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', (val) ->
+				$scope.currentChapter.lastChanged = new Date()
 				console.log 'changed'
 
 		$scope.newComment = (chapter) ->
@@ -36,6 +37,11 @@ controllers.controller 'editController', [
 
 		$scope.downloadWord = (document) ->
 			$window.open "/download/word/#{document._id}"
+
+		$scope.saveDocument = (document) ->
+			console.log "save"
+			console.dir document
+			Data.saveDocument(document)
 
 		Data.documents().then (documents) ->
 			$scope.documents = documents

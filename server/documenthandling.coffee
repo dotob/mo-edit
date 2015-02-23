@@ -1,10 +1,17 @@
+fs     = require 'fs'
 Pandoc = require './pandoc'
 pandoc = new Pandoc
-q = require 'q'
+path   = require 'path'
+q      = require 'q'
 
 DocumentHandling = class DocumentHandling
 
 	constructor: (@models) ->
+		# read html header/footer
+		@header = fs.readFileSync path.join('server','template','header.html')
+		@footer = fs.readFileSync path.join('server','template','footer.html')
+		#console.log "loaded header: #{@header}"
+		#console.log "loaded footer: #{@footer}"
 
 	createPreview: (docid) ->
 		deferred = q.defer()
@@ -12,7 +19,6 @@ DocumentHandling = class DocumentHandling
 			h = @createHtml(doc)
 			deferred.resolve h
 		.catch (e) ->
-			console.log e
 		deferred.promise
 
 	createWord: (docid) ->
@@ -22,24 +28,26 @@ DocumentHandling = class DocumentHandling
 			pandoc.createWord(html, docid).then (outname) ->
 				deferred.resolve outname
 			.catch (e) ->
-				console.log e
 		.catch (e) ->
-			console.log e
 		deferred.promise
 	
 	createHtml: (doc) ->
-		html = "<h1>#{doc.title}</h1>\n\n"
+		html = @header
+		html += "<h1>#{doc.title}</h1>\n\n"
 		for chapter in doc.chapters
 			html += "<h2>#{chapter.title}</h2>\n\n"
 			html += "<p>#{chapter.content}</p>\n\n"
+		html += @footer
 		html
 		
 	getDocument: (docid) ->
 		deferred = q.defer()
 		@models.Document.findOne {_id: docid}, (err, doc) ->
 			if err
+				console.log "getDocument error: #{err}"
 				deferred.reject err
 			else
+				console.log "getDocument success!"
 				deferred.resolve doc
 		deferred.promise
 

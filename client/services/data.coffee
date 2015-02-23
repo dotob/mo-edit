@@ -24,6 +24,9 @@ angular.module('moedit.Services').factory 'moedit.Data', [
 			documents: ->
 				baseDocuments.getList()
 				
+			saveDocument: (document) ->
+				document.put()
+				console.log "put document"
 
 			authors: ->
 
