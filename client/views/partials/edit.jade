@@ -28,10 +28,10 @@
 			div Hauptgutachter: {{ currentDocument.headAuthor }}
 			div.sidebar-button.btn-group(data-toggle="buttons")
 				label.state-radio.btn.btn-warning(type="button", ng-class="{'active' : currentChapter.state=='ONGOING'}")
-					input(type="radio")
+					input(type="radio", ng-model="currentChapter.state", value="ONGOING", ng-change="docStateChanged(value)")
 					| Offen
 				label.state-radio.btn.btn-success(type="button", ng-class="{'active' : currentChapter.state=='FINISHED'}")
-					input(type="radio")
+					input(type="radio", ng-model="currentChapter.state", value="FINISHED", ng-change="docStateChanged(value)")
 					| Fertig
 			div
 				button.sidebar-button.btn.btn-default(ng-click="showPreview(currentDocument)") Vorschau

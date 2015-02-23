@@ -24,17 +24,19 @@ controllers.controller 'editController', [
 			if $scope.chapterWatch?
 				$scope.chapterWatch() # remove watch
 			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
-			$log.debug chapter.content
 			$scope.currentChapter = chapter
 			for c in $scope.currentDocument.chapters
 				if c._id == chapter._id
 					c.selected = true
 				else
 					c.selected = false
-			$scope.chapterWatch = $scope.$watch 'currentChapter.content', (val) ->
+			$scope.chapterWatch = $scope.$watch 'currentChapter', chapterchange, true
+
+		chapterchange = (newValue, oldValue) ->
 				$log.debug "changed"
-				$scope.currentChapter.lastChanged = new Date()
-				autoSave()
+				if newValue != oldValue
+					$scope.currentChapter.lastChanged = new Date()
+					autoSave()
 
 		$scope.newComment = (chapter) ->
 			SweetAlert.info 'kommt noch'
@@ -54,6 +56,9 @@ controllers.controller 'editController', [
 					messageCenterService.add('danger', msg, {html: true});
 				else
 					messageCenterService.add('success', msg, {timeout: 2000, html: true});
+
+		$scope.docStateChanged = (val) ->
+			console.log $scope.currentDocument.state
 
 		Data.document($stateParams.docid).then (document) ->
 			console.dir document
