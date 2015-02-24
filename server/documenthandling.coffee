@@ -19,6 +19,7 @@ DocumentHandling = class DocumentHandling
 			h = @createHtml(doc)
 			deferred.resolve h
 		.catch (e) ->
+			console.log e
 		deferred.promise
 
 	createWord: (docid) ->
@@ -28,7 +29,21 @@ DocumentHandling = class DocumentHandling
 			pandoc.createWord(html, docid).then (outname) ->
 				deferred.resolve outname
 			.catch (e) ->
+				console.log e
 		.catch (e) ->
+			console.log e
+		deferred.promise
+	
+	createPDF: (docid) ->
+		deferred = q.defer()
+		@getDocument(docid).then (doc) =>
+			html = @createHtml doc    
+			pandoc.createPDF(html, docid).then (outname) ->
+				deferred.resolve outname
+			.catch (e) ->
+				console.log e
+		.catch (e) ->
+			console.log e
 		deferred.promise
 	
 	createHtml: (doc) ->

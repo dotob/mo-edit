@@ -22,4 +22,14 @@ Pandoc = class Pandoc
 				deferred.resolve filename
 		deferred.promise
 
+	createPDF: (html, outname) ->
+		deferred = q.defer()
+		filename = path.join 'docs', "#{outname}.pdf"
+		pdc html, 'html', 'pdf', ['-t', 'latex', '-o',  filename],  (err, result) ->
+			if err
+				deferred.reject err
+			else
+				deferred.resolve filename
+		deferred.promise
+
 module.exports = Pandoc

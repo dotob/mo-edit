@@ -37,7 +37,9 @@
 			div
 				a.sidebar-button.btn.btn-default(ng-href="/preview/{{currentDocument._id}}", target="_blank") Vorschau
 			div
-				a.sidebar-button.btn.btn-default(ng-href="/download/word/{{currentDocument._id}}", target="_blank") Download
+				a.sidebar-button.btn.btn-default(ng-href="/download/word/{{currentDocument._id}}", target="_blank") Download Word
+			div
+				a.sidebar-button.btn.btn-default(ng-href="/download/pdf/{{currentDocument._id}}", target="_blank") Download PDF
 			div
 				button.sidebar-button.btn.btn-default(ng-click="saveDocument(currentDocument)") Save
 

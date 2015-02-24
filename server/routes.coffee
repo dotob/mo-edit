@@ -27,10 +27,14 @@ module.exports = (app, models, basedir) ->
 		console.log documentHandling.createPreview(req.params.docid).then (h) ->
 			res.send h
 
-	# download route
+	# download routes
 	app.get '/download/word/:docid', (req, res) ->
-		console.log "requested download doc #{req.params.docid}"
+		console.log "requested download word #{req.params.docid}"
 		documentHandling.createWord(req.params.docid).then (filename) ->
+			res.sendFile path.join(basedir, filename)
+	app.get '/download/pdf/:docid', (req, res) ->
+		console.log "requested download pdf #{req.params.docid}"
+		documentHandling.createPDF(req.params.docid).then (filename) ->
 			res.sendFile path.join(basedir, filename)
 
 	app.get '/documents', (req, res) ->
