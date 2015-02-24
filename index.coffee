@@ -27,7 +27,7 @@ io = socketio(server) #create web socket for pushing data to clients
 io.on 'connection', (socket) =>
 	console.log "#{io.sockets.sockets.length} socket(s) connected"
 
-port = 3030
+port = process.env.NODEPORT || 3030
 server.listen port, ->
 	console.log "web server is listening on port #{port}"
 
