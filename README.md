@@ -1,11 +1,15 @@
 todo:
-- style word
-- merge
-- new chapter
-- new comment
-- style html preview (containerize)
 - TEST
+- setup digitalocean
 
 ideas:
 - kommentar selection (+++)
-- 
+- kommentare selektieren (+)
+- autoren eigenschaften erweitern (++)
+- bilder einfügen (+++)
+- versionierung (+++)
+
+bugs:
+- selection when focus => textangular
+- cannot finish chapter
+- cannot finish doc

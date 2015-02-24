@@ -30,7 +30,7 @@ controllers.controller 'editController', [
 					c.selected = true
 				else
 					c.selected = false
-			$scope.chapterWatch = $scope.$watch 'currentChapter', chapterchange, true
+			$scope.chapterWatch = $scope.$watch 'currentChapter.content', chapterchange, true
 
 		chapterchange = (newValue, oldValue) ->
 				$log.debug "changed"
@@ -39,16 +39,23 @@ controllers.controller 'editController', [
 					autoSave()
 
 		$scope.newComment = (chapter) ->
-			SweetAlert.info 'kommt noch'
+			chapter.comments.push
+				author: chance.name()
+				text: $scope.newCommentText
+				created: new Date()
+			$scope.newCommentText = ''
+			autoSave()
 
 		$scope.newChapter = (document) ->
-			SweetAlert.info 'kommt noch'
-
-		$scope.showPreview = (document) ->
-			$window.open "/preview/#{document._id}"
-
-		$scope.downloadWord = (document) ->
-			$window.open "/download/word/#{document._id}"
+			document.chapters.push
+				title: $scope.newChapterTitle
+				author: chance.name()
+				lastChanged: new Date()
+				state: 'ONGOING'
+				comments: []
+				version: 1
+			$scope.newChapterTitle = ''
+			autoSave()
 
 		$scope.saveDocument = (document, msg = "Gutachten erfolgreich gespeichert") ->
 			Data.saveDocument(document).then (response) ->

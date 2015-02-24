@@ -20,7 +20,8 @@
           <div>{{ chapter.lastChanged | fromNow }}</div>
         </li>
       </ul>
-      <button ng-click="newChapter(currentDocument)" class="sidebar-button btn btn-default">Neues Kapitel</button>
+      <input type="text" ng-model="newChapterTitle" placeholder="Titel" class="sidebar-button"/>
+      <button id="new-chapter" ng-click="newChapter(currentDocument)" class="sidebar-button btn btn-default">Neues Kapitel</button>
     </div>
     <div id="edit" ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}" class="no-gutter">
       <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]"></text-angular>
@@ -29,19 +30,15 @@
       <div class="big-font">Informationen</div>
       <div>Hauptgutachter: {{ currentDocument.headAuthor }}</div>
       <div data-toggle="buttons" class="sidebar-button btn-group">
-        <label type="button" ng-class="{'active' : currentChapter.state=='ONGOING'}" class="state-radio btn btn-warning">
-          <input type="radio" ng-model="currentChapter.state" value="ONGOING" ng-change="docStateChanged(value)"/>Offen
+        <label type="button" ng-class="{'active' : currentDocument.state=='ONGOING'}" class="state-radio btn btn-warning">
+          <input type="radio" ng-model="currentDocument.state" value="ONGOING" ng-click="docStateChanged(value)"/>Offen
         </label>
-        <label type="button" ng-class="{'active' : currentChapter.state=='FINISHED'}" class="state-radio btn btn-success">
-          <input type="radio" ng-model="currentChapter.state" value="FINISHED" ng-change="docStateChanged(value)"/>Fertig
+        <label type="button" ng-class="{'active' : currentDocument.state=='FINISHED'}" class="state-radio btn btn-success">
+          <input type="radio" ng-model="currentDocument.state" value="FINISHED" ng-click="docStateChanged(value)"/>Fertig
         </label>
       </div>
-      <div>
-        <button ng-click="showPreview(currentDocument)" class="sidebar-button btn btn-default">Vorschau</button>
-      </div>
-      <div>
-        <button ng-click="downloadWord(currentDocument)" class="sidebar-button btn btn-default">Download</button>
-      </div>
+      <div><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default">Vorschau</a></div>
+      <div><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default">Download</a></div>
       <div>
         <button ng-click="saveDocument(currentDocument)" class="sidebar-button btn btn-default">Save</button>
       </div>
@@ -53,6 +50,7 @@
           <div>{{ comment.created | fromNow}}</div>
         </li>
       </ul>
+      <input type="text" ng-model="newCommentText" placeholder="Kommentar" class="sidebar-button"/>
       <button ng-click="newComment(currentChapter)" class="sidebar-button btn btn-default">Neuer Kommentar</button>
     </div>
   </div>
