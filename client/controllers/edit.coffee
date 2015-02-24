@@ -60,8 +60,11 @@ controllers.controller 'editController', [
 		$scope.docStateChanged = (val) ->
 			console.log $scope.currentDocument.state
 
-		Data.document($stateParams.docid).then (document) ->
-			console.dir document
-			$scope.currentDocument = document
-			$scope.selectChapter($scope.currentDocument.chapters[0])
+		if $stateParams.docid
+			Data.document($stateParams.docid).then (document) ->
+				console.dir document
+				$scope.currentDocument = document
+				$scope.selectChapter($scope.currentDocument.chapters[0])
+		else
+			$state.go 'list'
 ]
