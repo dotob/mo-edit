@@ -8,8 +8,8 @@ DocumentHandling = class DocumentHandling
 
 	constructor: (@models) ->
 		# read html header/footer
-		@header = fs.readFileSync path.join('server','template','header.html')
-		@footer = fs.readFileSync path.join('server','template','footer.html')
+		@header = fs.readFileSync path.join(__dirname, 'server','template','header.html')
+		@footer = fs.readFileSync path.join(__dirname, 'server','template','footer.html')
 		#console.log "loaded header: #{@header}"
 		#console.log "loaded footer: #{@footer}"
 
