@@ -1,13 +1,15 @@
 .container-fluid
 	.row
-		.col-md-4.col-md-offset-4
+		.col-md-6.col-md-offset-3
+			h2 Gutachten
 			ul#doc-list.list-unstyled
 				li(ng-repeat="document in documents", ng-class="{'document-finished' : document.state=='FINISHED', 'document-ongoing' : document.state=='ONGOING'}") 
 					.doc-list-item
-						span.col-md-4 {{ document.title }}
-						span.col-md-4
+						span.col-md-3 {{ document.title }}
+						span.col-md-3 {{ docLastChangeDate(document) | fromNow}}
+						span.col-md-3
 							button.btn.btn-success(ng-click="openDocument(document)") Öffnen
-						span.col-md-4
+						span.col-md-3
 							button.btn.btn-danger(ng-click="deleteDocument(document)") Löschen
 			div
 				button.sidebar-button.btn.btn-primary(ng-click="newDocument()") Neues Gutachten

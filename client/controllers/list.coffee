@@ -19,9 +19,11 @@ controllers.controller 'listController', [
 			Data.documents().then (documents) ->
 				$scope.documents = documents
 				
-
 		$scope.openDocument = (document) ->
 			$state.go 'edit', {docid: document._id}
+
+		$scope.docLastChangeDate = (document) ->
+			_.max(document.chapters, (c) -> c.lastChanged)
 
 		Data.documents().then (documents) ->
 			$scope.documents = documents

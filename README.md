@@ -1,6 +1,5 @@
 todo:
 - TEST
-- setup digitalocean
 
 ideas:
 - kommentar selection (+++)
@@ -8,6 +7,10 @@ ideas:
 - autoren eigenschaften erweitern (++)
 - bilder einfügen (+++)
 - versionierung (+++)
+- neues gutachten (+)
+- html styling (++)
+- word styling (++)
+- pdf styling (+++)
 
 bugs:
 - selection when focus => textangular
