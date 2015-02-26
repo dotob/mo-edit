@@ -47,7 +47,7 @@ module.exports = (models) ->
 							key: "#{chance.integer({min: 100000, max: 999999})}"
 							headAuthor: _.sample authors
 							title: chance.word()
-							chapters: _.sample chapters, 2
+							chapters: _.sample chapters, 5
 							patient:
 								name: chance.name()
 								dob: chance.birthday()
