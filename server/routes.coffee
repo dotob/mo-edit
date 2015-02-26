@@ -49,6 +49,7 @@ module.exports = (app, models, basedir) ->
 
 	app.put '/documents/:docid', (req, res) ->
 		console.log "put doc #{req.params.docid} with body: #{JSON.stringify(req.body)}"
+		delete req.body._id
 		models.Document.findByIdAndUpdate req.params.docid, req.body, (err, dbdoc) ->
 			if err?
 				console.log "error while saving: #{err}"
