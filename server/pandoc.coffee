@@ -14,8 +14,9 @@ Pandoc = class Pandoc
 
 	createWord: (html, outname) ->
 		deferred = q.defer()
-		filename = path.join 'docs', "#{outname}.docx"
-		pdc html, 'html', 'docx', ['-o',  filename, '--reference-docx', 'server/template/template.docx'],  (err, result) ->
+		filename = path.join '..', 'docs', "#{outname}.docx"
+		refdoc = path.join __dirname, 'template', "template.docx"
+		pdc html, 'html', 'docx', ['-o',  filename, '--reference-docx', refdoc],  (err, result) ->
 			if err
 				deferred.reject err
 			else
@@ -24,7 +25,7 @@ Pandoc = class Pandoc
 
 	createPDF: (html, outname) ->
 		deferred = q.defer()
-		filename = path.join 'docs', "#{outname}.pdf"
+		filename = path.join '..', 'docs', "#{outname}.pdf"
 		pdc html, 'html', 'pdf', ['-t', 'latex', '-o',  filename],  (err, result) ->
 			if err
 				deferred.reject err
