@@ -31,11 +31,11 @@ module.exports = (app, models, basedir) ->
 	app.get '/download/word/:docid', (req, res) ->
 		console.log "requested download word #{req.params.docid}"
 		documentHandling.createWord(req.params.docid).then (filename) ->
-			res.sendFile path.join(basedir, filename)
+			res.sendFile filename
 	app.get '/download/pdf/:docid', (req, res) ->
 		console.log "requested download pdf #{req.params.docid}"
 		documentHandling.createPDF(req.params.docid).then (filename) ->
-			res.sendFile path.join(basedir, filename)
+			res.sendFile filename
 
 	app.get '/documents', (req, res) ->
 		console.log 'request all documents'
