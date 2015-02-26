@@ -23,7 +23,7 @@ controllers.controller 'listController', [
 			$state.go 'edit', {docid: document._id}
 
 		$scope.docLastChangeDate = (document) ->
-			_.max(document.chapters, (c) -> c.lastChanged)
+			_(document.chapters).max((c) -> moment(c.lastChanged)).value().lastChanged
 
 		Data.documents().then (documents) ->
 			$scope.documents = documents

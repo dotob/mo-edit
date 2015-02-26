@@ -31,7 +31,8 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 # take not logged in user to login
 app.run ['$rootScope', '$state', '$log', 'moedit.Auth', ($rootScope, $state, $log, Auth) ->
 	$rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
-		$log.info "statechange from: #{fromState.name} to: #{toState.name}"
+		$rootScope.showFullscreen = toState.name == 'edit'
+		$log.info "statechange from: #{fromState.name} to: #{toState.name}, showFullscreen: #{$rootScope.showFullscreen}"
 		return
 		if toState.name != 'login'
 			if !Auth.isLoggedIn()

@@ -55,6 +55,7 @@ controllers.controller 'editController', [
 				comments: []
 				version: 1
 			$scope.newChapterTitle = ''
+			$scope.selectChapter(_.last document.chapters)
 			autoSave()
 
 		$scope.saveDocument = (document, msg = "Gutachten erfolgreich gespeichert") ->
