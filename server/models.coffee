@@ -5,6 +5,7 @@ module.exports = (mongoose) ->
 	CommentSchema = new Schema
 		author: String
 		text: String
+		key: String
 		created: Date
 
 	ChapterSchema = new Schema 

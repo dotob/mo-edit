@@ -11,7 +11,8 @@ controllers.controller 'editController', [
 	'moedit.Focus'
 	'moedit.Data'
 	'messageCenterService'
-	($scope, $log, $q, $state, $stateParams, $window, Socket, SweetAlert, Focus, Data, messageCenterService) ->
+	'ngDialog'
+	($scope, $log, $q, $state, $stateParams, $window, Socket, SweetAlert, Focus, Data, messageCenterService, ngDialog) ->
 
 		# autosave
 		autoSaveCurrentDocument = () ->
@@ -33,10 +34,11 @@ controllers.controller 'editController', [
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', chapterchange, true
 
 		chapterchange = (newValue, oldValue) ->
-				$log.debug "changed"
-				if newValue != oldValue
-					$scope.currentChapter.lastChanged = new Date()
-					autoSave()
+			$log.debug "changed"
+			console.log $scope.currentChapter.content
+			if newValue != oldValue
+				$scope.currentChapter.lastChanged = new Date()
+				autoSave()
 
 		$scope.newComment = (chapter) ->
 			chapter.comments.push
@@ -45,6 +47,24 @@ controllers.controller 'editController', [
 				created: new Date()
 			$scope.newCommentText = ''
 			autoSave()
+
+		$scope.createComment = (chapter) ->
+			deferred = $q.defer()
+			dialog = ngDialog.open({ template: 'comment-input-dialog', scope: $scope })
+			dialog.closePromise.then (data) ->
+				if data.value == 'OK'
+					c = 
+						author: chance.name()
+						text: $scope.newCommentText
+						key: chance.guid()
+						created: new Date()
+					chapter.comments.push c
+					$scope.newCommentText = ''
+					autoSave()
+					deferred.resolve c.key # return key to use as wrap
+				else
+					deferred.resolve null
+			deferred.promise
 
 		$scope.newChapter = (document) ->
 			document.chapters.push

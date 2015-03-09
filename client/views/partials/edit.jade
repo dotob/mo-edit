@@ -1,3 +1,22 @@
+script(type="text/ng-template" id="comment-input-dialog")
+	#commentInputDialog
+		.row
+			h1 Neuer Kommentar
+		.row
+			form.form-horizontal(role="form")
+				.form-group
+					label.col-md-4.control-label(for="comment") Kommentar
+					.col-md-6
+						textarea#comment.form-control(rows="10", cols="50", ng-model="newCommentText")
+		.row
+			.col-md-6
+				button.detailactionbutton.btn.btn-success(ng-click="closeThisDialog('OK')", ng-disabled="false") Ok
+			.col-md-6
+				button.detailactionbutton.btn.btn-danger(ng-click="closeThisDialog('CANCEL')") Abbrechen
+
+
+
+
 .container-fluid
 	#doc-info.row(ng-hide="fullscreen")
 		#doc-number.col-md-2
@@ -22,7 +41,7 @@
 			button#new-chapter.sidebar-button.btn.btn-default(ng-click="newChapter(currentDocument)") Neues Kapitel
 
 		#edit.no-gutter(ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}")
-			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]")
+			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent', 'addComment']]")
 
 		#sidebar.col-md-2(ng-hide="fullscreen")
 			.big-font Informationen
@@ -49,6 +68,6 @@
 					div {{ comment.author }}
 					div {{ comment.text }}
 					div {{ comment.created | fromNow}}
-			input.sidebar-button(type="text", ng-model="newCommentText", placeholder="Kommentar")
-			button.sidebar-button.btn.btn-default(ng-click="newComment(currentChapter)") Neuer Kommentar
+			//- input.sidebar-button(type="text", ng-model="newCommentText", placeholder="Kommentar")
+			//- button.sidebar-button.btn.btn-default(ng-click="newComment(currentChapter)") Neuer Kommentar
 

@@ -1,4 +1,29 @@
 
+<script type="text/ng-template" id="comment-input-dialog">
+  <div id="commentInputDialog">
+    <div class="row">
+      <h1>Neuer Kommentar</h1>
+    </div>
+    <div class="row">
+      <form role="form" class="form-horizontal">
+        <div class="form-group">
+          <label for="comment" class="col-md-4 control-label">Kommentar</label>
+          <div class="col-md-6">
+            <textarea id="comment" rows="10" cols="50" ng-model="newCommentText" class="form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <button ng-click="closeThisDialog('OK')" ng-disabled="false" class="detailactionbutton btn btn-success">Ok</button>
+      </div>
+      <div class="col-md-6">
+        <button ng-click="closeThisDialog('CANCEL')" class="detailactionbutton btn btn-danger">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+</script>
 <div class="container-fluid">
   <div id="doc-info" ng-hide="fullscreen" class="row">
     <div id="doc-number" class="col-md-2">
@@ -24,7 +49,7 @@
       <button id="new-chapter" ng-click="newChapter(currentDocument)" class="sidebar-button btn btn-default">Neues Kapitel</button>
     </div>
     <div id="edit" ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}" class="no-gutter">
-      <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent']]"></text-angular>
+      <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent', 'addComment']]"></text-angular>
     </div>
     <div id="sidebar" ng-hide="fullscreen" class="col-md-2">
       <div class="big-font">Informationen</div>
@@ -51,8 +76,6 @@
           <div>{{ comment.created | fromNow}}</div>
         </li>
       </ul>
-      <input type="text" ng-model="newCommentText" placeholder="Kommentar" class="sidebar-button"/>
-      <button ng-click="newComment(currentChapter)" class="sidebar-button btn btn-default">Neuer Kommentar</button>
     </div>
   </div>
 </div>

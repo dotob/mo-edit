@@ -6,10 +6,10 @@ app = angular.module('moedit.App', [
 	'ui.router'
 	'angularSpinner'
 	'MessageCenterModule'
-  'moedit.Controllers'
-  'moedit.Services'
-  'textAngular'
-  'ui.sortable'
+	'moedit.Controllers'
+	'moedit.Services'
+	'textAngular'
+	'ui.sortable'
 #  'moedit.Logging'
 ])
 
