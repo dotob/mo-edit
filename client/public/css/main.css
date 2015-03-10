@@ -63,6 +63,9 @@ body {
 .chapter-selected {
   margin-right: -15px;
 }
+.comment-selected {
+  border: 1px solid #000;
+}
 .chapter-finished {
   border-left: 8px solid #008000;
 }

@@ -33,38 +33,46 @@ controllers.controller 'editController', [
 					c.selected = false
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', chapterchange, true
 
+		$scope.selectComment = (comment) ->
+			$log.info "select comment #{comment.text}:#{comment.selected}"
+			$scope.currentComment = comment
+			for c in $scope.currentChapter.comments
+				if c.key == comment.key
+					c.selected = true
+				else
+					c.selected = false
+
 		chapterchange = (newValue, oldValue) ->
 			$log.debug "changed"
 			console.log $scope.currentChapter.content
 			if newValue != oldValue
 				$scope.currentChapter.lastChanged = new Date()
-				autoSave()
+				removeMe = []
+				for comment in $scope.currentChapter.comments
+					if newValue.indexOf(comment.key) < 0
+						removeMe.push comment.key
+				for r in removeMe
+					_.remove($scope.currentChapter.comments, (c) -> c.key == r)
+				autoSave()	
 
 		$scope.newComment = (chapter) ->
-			chapter.comments.push
+			comment = 
 				author: chance.name()
-				text: $scope.newCommentText
+				key: chance.guid()
 				created: new Date()
-			$scope.newCommentText = ''
+			chapter.comments.push comment
 			autoSave()
+			comment
 
-		$scope.createComment = (chapter) ->
-			deferred = $q.defer()
-			dialog = ngDialog.open({ template: 'comment-input-dialog', scope: $scope })
-			dialog.closePromise.then (data) ->
-				if data.value == 'OK'
-					c = 
-						author: chance.name()
-						text: $scope.newCommentText
-						key: chance.guid()
-						created: new Date()
-					chapter.comments.push c
-					$scope.newCommentText = ''
-					autoSave()
-					deferred.resolve c.key # return key to use as wrap
-				else
-					deferred.resolve null
-			deferred.promise
+		$scope.getCommentText = (chapter, commentKey) ->
+			dialog = ngDialog.open
+				template: 'comment-input-dialog'
+				scope: $scope
+			dialog.closePromise.then (tmp) ->
+				console.log "key: #{commentKey}, text: #{$scope.newCommentText}"
+				comment = _.find(chapter.comments, (c) -> c.key == commentKey)
+				comment.text = $scope.newCommentText
+				autoSave()
 
 		$scope.newChapter = (document) ->
 			document.chapters.push

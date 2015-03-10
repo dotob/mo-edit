@@ -10,9 +10,9 @@ script(type="text/ng-template" id="comment-input-dialog")
 						textarea#comment.form-control(rows="10", cols="50", ng-model="newCommentText")
 		.row
 			.col-md-6
-				button.detailactionbutton.btn.btn-success(ng-click="closeThisDialog('OK')", ng-disabled="false") Ok
+				button.detailactionbutton.btn.btn-success(ng-click="closeThisDialog()", ng-disabled="false") Ok
 			.col-md-6
-				button.detailactionbutton.btn.btn-danger(ng-click="closeThisDialog('CANCEL')") Abbrechen
+				button.detailactionbutton.btn.btn-danger(ng-click="closeThisDialog()") Abbrechen
 
 
 
@@ -64,7 +64,7 @@ script(type="text/ng-template" id="comment-input-dialog")
 
 			.big-font Kommentare
 			ul#comments-list.list-unstyled(ui-sortable ng-model="currentChapter.comments")
-				li.comment-info(ng-repeat="comment in currentChapter.comments") 
+				li.comment-info(ng-repeat="comment in currentChapter.comments", ng-click="selectComment(comment)", ng-class="{'comment-selected' : comment.selected}") 
 					div {{ comment.author }}
 					div {{ comment.text }}
 					div {{ comment.created | fromNow}}

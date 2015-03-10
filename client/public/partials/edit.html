@@ -16,10 +16,10 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button ng-click="closeThisDialog('OK')" ng-disabled="false" class="detailactionbutton btn btn-success">Ok</button>
+        <button ng-click="closeThisDialog()" ng-disabled="false" class="detailactionbutton btn btn-success">Ok</button>
       </div>
       <div class="col-md-6">
-        <button ng-click="closeThisDialog('CANCEL')" class="detailactionbutton btn btn-danger">Abbrechen</button>
+        <button ng-click="closeThisDialog()" class="detailactionbutton btn btn-danger">Abbrechen</button>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@
       </div>
       <div class="big-font">Kommentare</div>
       <ul id="comments-list" ui-sortable="ui-sortable" ng-model="currentChapter.comments" class="list-unstyled">
-        <li ng-repeat="comment in currentChapter.comments" class="comment-info"> 
+        <li ng-repeat="comment in currentChapter.comments" ng-click="selectComment(comment)" ng-class="{'comment-selected' : comment.selected}" class="comment-info"> 
           <div>{{ comment.author }}</div>
           <div>{{ comment.text }}</div>
           <div>{{ comment.created | fromNow}}</div>
