@@ -28,6 +28,7 @@ module.exports = (models) ->
 			for j in [0..5]
 				comments.push 
 					author: _.sample authors
+					key: chance.guid()
 					text: _.sample ['super absatz', 'mist, nochmal', 'guck ich mir nochmal an']
 					created: new Date()
 			save models.Comment, comments, () ->

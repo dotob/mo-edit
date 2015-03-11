@@ -22,6 +22,7 @@ controllers.controller 'editController', [
 		autoSave = _.debounce autoSaveCurrentDocument, 5000
 
 		$scope.selectChapter = (chapter) ->
+			unhighlightAllComments()
 			if $scope.chapterWatch?
 				$scope.chapterWatch() # remove watch
 			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
@@ -34,13 +35,26 @@ controllers.controller 'editController', [
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', chapterchange, true
 
 		$scope.selectComment = (comment) ->
-			$log.info "select comment #{comment.text}:#{comment.selected}"
+			unhighlightComment($scope.currentComment)
+			$log.info "select comment: #{comment.text}:#{comment.selected}"
 			$scope.currentComment = comment
 			for c in $scope.currentChapter.comments
 				if c.key == comment.key
 					c.selected = true
 				else
 					c.selected = false
+			highlightComment($scope.currentComment)
+
+		highlightComment = (comment) ->
+			if comment?
+				$("##{comment.key}").addClass('comment-highlight')
+
+		unhighlightComment = (comment) ->
+			if comment?
+				$("##{comment.key}").removeClass('comment-highlight')
+
+		unhighlightAllComments = () ->
+			$(".comment").removeClass('comment-highlight')
 
 		chapterchange = (newValue, oldValue) ->
 			$log.debug "changed"
@@ -50,9 +64,9 @@ controllers.controller 'editController', [
 				removeMe = []
 				for comment in $scope.currentChapter.comments
 					if newValue.indexOf(comment.key) < 0
-						removeMe.push comment.key
+						removeMe.push comment
 				for r in removeMe
-					_.remove($scope.currentChapter.comments, (c) -> c.key == r)
+					deleteComment r
 				autoSave()	
 
 		$scope.newComment = (chapter) ->
@@ -68,10 +82,10 @@ controllers.controller 'editController', [
 			dialog = ngDialog.open
 				template: 'comment-input-dialog'
 				scope: $scope
-			dialog.closePromise.then (tmp) ->
-				console.log "key: #{commentKey}, text: #{$scope.newCommentText}"
+			dialog.closePromise.then (dialogData) ->
+				console.log "key: #{commentKey}, text: #{dialogData.value}"
 				comment = _.find(chapter.comments, (c) -> c.key == commentKey)
-				comment.text = $scope.newCommentText
+				comment.text = dialogData.value
 				autoSave()
 
 		$scope.newChapter = (document) ->
@@ -96,6 +110,25 @@ controllers.controller 'editController', [
 		$scope.docStateChanged = (val) ->
 			console.log $scope.currentDocument.state
 
+		$scope.deleteComment = (comment) ->
+			unhighlightComment(comment)
+			r = new RegExp "<span id=\"#{comment.key}\" class=\".*?\">"
+			comment.text.replace r, '', 'g'
+			_.remove($scope.currentChapter.comments, (c) -> c.key == comment.key)
+			autoSave()
+
+		$scope.editComment = (comment) -> 
+			$scope.newCommentText = comment.text
+			dialog = ngDialog.open
+				template: 'comment-input-dialog'
+				scope: $scope
+			dialog.closePromise.then (dialogData) ->
+				console.log "key: #{comment.key}, text: #{dialogData.value}"
+				#comment = _.find($scope.currentChapter.comments, (c) -> c.key == comment.key)
+				comment.text = dialogData.value
+				autoSave()
+
+		# fix routing if someone comes here with no or non existing docid
 		if $stateParams.docid
 			Data.document($stateParams.docid).then (document) ->
 				console.dir document

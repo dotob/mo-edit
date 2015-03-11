@@ -7,16 +7,16 @@
     <div class="row">
       <form role="form" class="form-horizontal">
         <div class="form-group">
-          <label for="comment" class="col-md-4 control-label">Kommentar</label>
+          <label for="commentText" class="col-md-4 control-label">Kommentar</label>
           <div class="col-md-6">
-            <textarea id="comment" rows="10" cols="50" ng-model="newCommentText" class="form-control"></textarea>
+            <textarea id="commentText" rows="10" cols="50" ng-model="newCommentText" class="form-control"></textarea>
           </div>
         </div>
       </form>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button ng-click="closeThisDialog()" ng-disabled="false" class="detailactionbutton btn btn-success">Ok</button>
+        <button ng-click="closeThisDialog(newCommentText)" ng-disabled="false" class="detailactionbutton btn btn-success">Ok</button>
       </div>
       <div class="col-md-6">
         <button ng-click="closeThisDialog()" class="detailactionbutton btn btn-danger">Abbrechen</button>
@@ -30,9 +30,24 @@
       <h1>{{ currentDocument.key }}</h1>
     </div>
     <div id="doc-details" class="col-md-10">
-      <h2>{{ currentDocument.patient.name }}</h2>
-      <h3>geb. {{ currentDocument.patient.dob | date:'dd.MM.yyyy' }} ({{ currentDocument.patient.dob | fromNow }})</h3>
-      <h2>{{ currentDocument.title }}</h2>
+      <div class="col-md-8">
+        <h2>{{ currentDocument.patient.name }}</h2>
+        <h3>geb. {{ currentDocument.patient.dob | date:'dd.MM.yyyy' }} ({{ currentDocument.patient.dob | fromNow }})</h3>
+        <h2>{{ currentDocument.title }}</h2>
+      </div>
+      <div class="col-md-4">
+        <div>Hauptgutachter: {{ currentDocument.headAuthor }}</div>
+        <div data-toggle="buttons" class="sidebar-button btn-group">
+          <label type="button" ng-class="{'active' : currentDocument.state=='ONGOING'}" class="state-radio btn btn-warning">
+            <input type="radio" ng-model="currentDocument.state" value="ONGOING" ng-click="docStateChanged(value)"/>Offen
+          </label>
+          <label type="button" ng-class="{'active' : currentDocument.state=='FINISHED'}" class="state-radio btn btn-success">
+            <input type="radio" ng-model="currentDocument.state" value="FINISHED" ng-click="docStateChanged(value)"/>Fertig
+          </label>
+        </div>
+        <div><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default"><span class="glyphicon glyphicon-file"></span></a>
+        </div>
+      </div>
     </div>
   </div>
   <div id="main-edit-area" class="row">
@@ -52,27 +67,11 @@
       <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent', 'addComment']]"></text-angular>
     </div>
     <div id="sidebar" ng-hide="fullscreen" class="col-md-2">
-      <div class="big-font">Informationen</div>
-      <div>Hauptgutachter: {{ currentDocument.headAuthor }}</div>
-      <div data-toggle="buttons" class="sidebar-button btn-group">
-        <label type="button" ng-class="{'active' : currentDocument.state=='ONGOING'}" class="state-radio btn btn-warning">
-          <input type="radio" ng-model="currentDocument.state" value="ONGOING" ng-click="docStateChanged(value)"/>Offen
-        </label>
-        <label type="button" ng-class="{'active' : currentDocument.state=='FINISHED'}" class="state-radio btn btn-success">
-          <input type="radio" ng-model="currentDocument.state" value="FINISHED" ng-click="docStateChanged(value)"/>Fertig
-        </label>
-      </div>
-      <div><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default">Vorschau</a></div>
-      <div><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default">Download Word</a></div>
-      <div><a ng-href="/download/pdf/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default">Download PDF</a></div>
-      <div>
-        <button ng-click="saveDocument(currentDocument)" class="sidebar-button btn btn-default">Save</button>
-      </div>
       <div class="big-font">Kommentare</div>
-      <ul id="comments-list" ui-sortable="ui-sortable" ng-model="currentChapter.comments" class="list-unstyled">
+      <ul id="comments-list" class="list-unstyled">
         <li ng-repeat="comment in currentChapter.comments" ng-click="selectComment(comment)" ng-class="{'comment-selected' : comment.selected}" class="comment-info"> 
-          <div>{{ comment.author }}</div>
-          <div>{{ comment.text }}</div>
+          <div> <span>{{ comment.author }}</span><span ng-click="deleteComment(comment)" class="glyphicon glyphicon-remove pull-right"></span></div>
+          <div> <span>{{ comment.text }}</span><span ng-click="editComment(comment)" class="glyphicon glyphicon-pencil pull-right"></span></div>
           <div>{{ comment.created | fromNow}}</div>
         </li>
       </ul>

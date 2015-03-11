@@ -15,12 +15,7 @@ app.config ($provide) ->
 					myScope = @.$parent.$parent
 					comment = myScope.newComment(myScope.currentChapter)
 
-					@$editor().wrapSelection 'insertHTML', "<span id='#{comment.key}'>#{sel}</span>"
-
-					css = 
-						backgroundColor : colors[myScope.currentChapter.comments.length]
-						color : '#fff'
-					$("##{comment.key}").css(css)
+					@$editor().wrapSelection 'insertHTML', "<span id='#{comment.key} class='comment'>#{sel}</span>"
 
 					myScope.getCommentText(myScope.currentChapter, comment.key)
 					console.log "wrapped"

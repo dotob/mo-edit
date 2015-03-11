@@ -46,8 +46,14 @@ body {
   border-left: 1px solid #000;
   border-bottom: 1px solid #000;
 }
+#doc-moredetails {
+  border-bottom: 1px solid #000;
+}
 #main-edit-area {
   margin-top: 10px;
+}
+.comment-highlight {
+  background-color: #ff0;
 }
 .sidebar-button {
   width: 100%;
@@ -62,9 +68,6 @@ body {
 }
 .chapter-selected {
   margin-right: -15px;
-}
-.comment-selected {
-  border: 1px solid #000;
 }
 .chapter-finished {
   border-left: 8px solid #008000;
@@ -87,6 +90,9 @@ body {
 .comment-info {
   padding: 5px;
   margin: 3px;
+}
+.comment-selected {
+  margin-left: -15px;
 }
 .detailactionbutton {
   margin: 2px;
