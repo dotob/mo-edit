@@ -45,7 +45,7 @@
             <input type="radio" ng-model="currentDocument.state" value="FINISHED" ng-click="docStateChanged(value)"/>Fertig
           </label>
         </div>
-        <div><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button btn btn-default"><span class="glyphicon glyphicon-file"></span></a>
+        <div class="btn-group doc-actions"><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-file"></span></a>
         </div>
       </div>
     </div>
@@ -71,8 +71,8 @@
       <ul id="comments-list" class="list-unstyled">
         <li ng-repeat="comment in currentChapter.comments" ng-click="selectComment(comment)" ng-class="{'comment-selected' : comment.selected}" class="comment-info"> 
           <div> <span>{{ comment.author }}</span><span ng-click="deleteComment(comment)" class="glyphicon glyphicon-remove pull-right"></span></div>
-          <div> <span>{{ comment.text }}</span><span ng-click="editComment(comment)" class="glyphicon glyphicon-pencil pull-right"></span></div>
-          <div>{{ comment.created | fromNow}}</div>
+          <div class="inset"><span class="small">{{ comment.text }}</span><span ng-click="editComment(comment)" class="glyphicon glyphicon-pencil pull-right"></span></div>
+          <div class="inset"><span class="invisible-text">.</span><span class="small text-muted pull-right">{{ comment.created | fromNow}}</span></div>
         </li>
       </ul>
     </div>

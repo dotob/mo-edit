@@ -24,6 +24,7 @@ controllers.controller 'editController', [
 		$scope.selectChapter = (chapter) ->
 			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
 			unhighlightAllComments()
+			unselectComments()
 			if $scope.chapterWatch?
 				$scope.chapterWatch() # remove watch
 			$scope.currentChapter = chapter
@@ -36,7 +37,7 @@ controllers.controller 'editController', [
 
 		$scope.selectComment = (comment) ->
 			unhighlightComment($scope.currentComment)
-			$log.info "select comment: #{comment.text}:#{comment.selected}"
+			$log.info "select comment: #{comment.text}:#{comment.selected}:#{comment.key}"
 			$scope.currentComment = comment
 			for c in $scope.currentChapter.comments
 				if c.key == comment.key
@@ -45,6 +46,11 @@ controllers.controller 'editController', [
 					c.selected = false
 			highlightComment($scope.currentComment)
 			return true # this is because angular is complaing about: "Referencing a DOM node in Expression" when just returning something else
+
+		unselectComments = () ->
+			if $scope.currentChapter?.comments?
+				for c in $scope.currentChapter.comments
+					c.selected = false
 
 		highlightComment = (comment) ->
 			if comment?
@@ -81,8 +87,9 @@ controllers.controller 'editController', [
 					key: commentKey
 					created: new Date()
 					text: dialogData.value
-				console.dir chapter
+				chapter.lastChanged = new Date()
 				chapter.comments.push comment
+				$scope.selectComment comment
 				autoSave()
 
 		$scope.newChapter = (document) ->
@@ -109,8 +116,14 @@ controllers.controller 'editController', [
 
 		$scope.deleteComment = (comment) ->
 			unhighlightComment(comment)
-			r = new RegExp "<span id=\"#{comment.key}\" class=\".*?\">"
-			$scope.currentChapter.content.replace r, '', 'g'
+			rgx = "<span id=\"#{comment.key}\" class=\".*?\">(.*?)<\/span>"
+			console.log "rgx: #{rgx}"
+			r = new RegExp rgx
+			console.log "before: #{$scope.currentChapter.content}"
+			m = $scope.currentChapter.content.match r
+			console.dir m
+			$scope.currentChapter.content = $scope.currentChapter.content.replace r, m[1], 'g'
+			console.log "after : #{$scope.currentChapter.content}"
 			_.remove($scope.currentChapter.comments, (c) -> c.key == comment.key)
 			autoSave()
 

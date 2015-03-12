@@ -42,7 +42,7 @@ module.exports = (models) ->
 						content: "#{chance.paragraph()} #{someCommentedText}"
 						lastChanged: new Date()
 						state: _.sample ['ONGOING', 'FINISHED']
-						comments: _.sample comments
+						comments: aComment
 						version: 1
 				save models.Chapter, chapters, () ->
 					for m in [0..3]
