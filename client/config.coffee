@@ -13,12 +13,12 @@ app.config ($provide) ->
 				action: ->
 					sel = document.getSelection().focusNode.data
 					myScope = @.$parent.$parent
-					comment = myScope.newComment(myScope.currentChapter)
-
-					@$editor().wrapSelection 'insertHTML', "<span id='#{comment.key} class='comment'>#{sel}</span>"
-
-					myScope.getCommentText(myScope.currentChapter, comment.key)
-					console.log "wrapped"
+					newKey = chance.guid()
+					myScope.commentRemoval = false
+					@$editor().wrapSelection 'insertHTML', "<span id='#{newKey}' class='comment'>#{sel}</span>"
+					myScope.commentRemoval = true
+					console.log "wrapped: #{myScope.currentChapter.content}"
+					myScope.newComment(myScope.currentChapter, newKey)
 			# add the button to the default toolbar definition
 			taOptions.toolbar[1].push 'addComment'
 			taOptions

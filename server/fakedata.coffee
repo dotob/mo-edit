@@ -33,11 +33,13 @@ module.exports = (models) ->
 					created: new Date()
 			save models.Comment, comments, () ->
 				for k in [0..10]
+					aComment = _.sample comments
+					someCommentedText = "<span id=\"#{aComment.key}\" class=\"comment\">#{chance.sentence()}</span>"
 					chapters.push 
 						author: _.sample authors
 						number: "#{k}"
 						title: chance.word()
-						content: chance.paragraph()
+						content: "#{chance.paragraph()} #{someCommentedText}"
 						lastChanged: new Date()
 						state: _.sample ['ONGOING', 'FINISHED']
 						comments: _.sample comments

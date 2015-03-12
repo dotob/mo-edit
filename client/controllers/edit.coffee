@@ -22,10 +22,10 @@ controllers.controller 'editController', [
 		autoSave = _.debounce autoSaveCurrentDocument, 5000
 
 		$scope.selectChapter = (chapter) ->
+			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
 			unhighlightAllComments()
 			if $scope.chapterWatch?
 				$scope.chapterWatch() # remove watch
-			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
 			$scope.currentChapter = chapter
 			for c in $scope.currentDocument.chapters
 				if c._id == chapter._id
@@ -44,6 +44,7 @@ controllers.controller 'editController', [
 				else
 					c.selected = false
 			highlightComment($scope.currentComment)
+			return true # this is because angular is complaing about: "Referencing a DOM node in Expression" when just returning something else
 
 		highlightComment = (comment) ->
 			if comment?
@@ -57,35 +58,31 @@ controllers.controller 'editController', [
 			$(".comment").removeClass('comment-highlight')
 
 		chapterchange = (newValue, oldValue) ->
-			$log.debug "changed"
-			console.log $scope.currentChapter.content
+			$log.debug "changed:: #{$scope.currentChapter.content}"
 			if newValue != oldValue
 				$scope.currentChapter.lastChanged = new Date()
-				removeMe = []
-				for comment in $scope.currentChapter.comments
-					if newValue.indexOf(comment.key) < 0
-						removeMe.push comment
-				for r in removeMe
-					deleteComment r
-				autoSave()	
+				if $scope.commentRemoval
+					removeMe = []
+					for comment in $scope.currentChapter.comments
+						if newValue.indexOf(comment.key) < 0
+							removeMe.push comment
+					for r in removeMe
+						$scope.deleteComment r
+					autoSave()	
 
-		$scope.newComment = (chapter) ->
-			comment = 
-				author: chance.name()
-				key: chance.guid()
-				created: new Date()
-			chapter.comments.push comment
-			autoSave()
-			comment
-
-		$scope.getCommentText = (chapter, commentKey) ->
+		$scope.newComment = (chapter, commentKey) ->
 			dialog = ngDialog.open
 				template: 'comment-input-dialog'
 				scope: $scope
 			dialog.closePromise.then (dialogData) ->
 				console.log "key: #{commentKey}, text: #{dialogData.value}"
-				comment = _.find(chapter.comments, (c) -> c.key == commentKey)
-				comment.text = dialogData.value
+				comment = 
+					author: chance.name()
+					key: commentKey
+					created: new Date()
+					text: dialogData.value
+				console.dir chapter
+				chapter.comments.push comment
 				autoSave()
 
 		$scope.newChapter = (document) ->
@@ -113,7 +110,7 @@ controllers.controller 'editController', [
 		$scope.deleteComment = (comment) ->
 			unhighlightComment(comment)
 			r = new RegExp "<span id=\"#{comment.key}\" class=\".*?\">"
-			comment.text.replace r, '', 'g'
+			$scope.currentChapter.content.replace r, '', 'g'
 			_.remove($scope.currentChapter.comments, (c) -> c.key == comment.key)
 			autoSave()
 

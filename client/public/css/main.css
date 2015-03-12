@@ -87,6 +87,9 @@ body {
 #comments-list li:hover {
   background: #d6d6d6;
 }
+.comment {
+  border-bottom: 1px dotted #6a959d;
+}
 .comment-info {
   padding: 5px;
   margin: 3px;
