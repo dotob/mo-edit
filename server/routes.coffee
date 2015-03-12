@@ -58,6 +58,16 @@ module.exports = (app, models, basedir) ->
 				console.log "saved doc #{req.params.docid} successfully"
 				res.sendStatus(200)
 
+	app.put '/documents/', (req, res) ->
+		console.log "put new doc with body: #{JSON.stringify(req.body)}"
+		models.Document.collection.insert [req.body], (err, dbdoc) ->
+			if err?
+				console.log "error while saving: #{err}"
+				res.sendStatus(500)
+			else
+				console.log "saved doc #{req.params.docid} successfully"
+				res.sendStatus(200)
+
 	app.delete '/documents/:docid', (req, res) ->
 		console.log "delete doc #{req.params.docid}"
 		models.Document.findById req.params.docid, (err, dbdoc) ->

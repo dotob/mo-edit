@@ -15,7 +15,6 @@ module.exports = (mongoose) ->
 		content: String
 		lastChanged: Date
 		state: String
-		chapters: [ChapterSchema]
 		comments: [CommentSchema]
 		version: String
 
@@ -25,6 +24,7 @@ module.exports = (mongoose) ->
 		headAuthor: String
 		patient: {name: String, dob: Date}
 		chapters: [ChapterSchema]
+		version: Number
 		state: String
 
 	Comment = mongoose.model('comment', CommentSchema)

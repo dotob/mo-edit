@@ -138,6 +138,12 @@ controllers.controller 'editController', [
 				comment.text = dialogData.value
 				autoSave()
 
+		$scope.newVersion = (document) ->
+			newDoc = angular.copy document
+			delete newDoc._id
+			newDoc.version++
+			$scope.saveDocument newDoc, "Neue Version gespeichert"
+
 		# fix routing if someone comes here with no or non existing docid
 		if $stateParams.docid
 			Data.document($stateParams.docid).then (document) ->

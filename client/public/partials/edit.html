@@ -45,8 +45,9 @@
             <input type="radio" ng-model="currentDocument.state" value="FINISHED" ng-click="docStateChanged(value)"/>Fertig
           </label>
         </div>
-        <div class="btn-group doc-actions"><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-file"></span></a>
-        </div>
+        <div class="btn-group doc-actions"><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-file"></span></a></div>
+        <button id="new-version" ng-click="newVersion(currentDocument)" class="sidebar-button btn btn-default">Neue Version
+        </button>
       </div>
     </div>
   </div>

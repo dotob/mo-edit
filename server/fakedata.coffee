@@ -47,6 +47,7 @@ module.exports = (models) ->
 				save models.Chapter, chapters, () ->
 					for m in [0..3]
 						documents.push 
+							version: 0
 							key: "#{chance.integer({min: 100000, max: 999999})}"
 							headAuthor: _.sample authors
 							title: chance.word()

@@ -19,7 +19,10 @@ angular.module('moedit.Services').factory 'moedit.Data', [
 				deferred.promise
 			
 			saveDocument: (doc) ->
-				$http.put "/documents/#{doc._id}", doc
+				if doc._id?
+					$http.put "/documents/#{doc._id}", doc
+				else
+					$http.put "/documents/", doc
 
 			deleteDocument: (doc) ->
 				$http.delete "/documents/#{doc._id}"

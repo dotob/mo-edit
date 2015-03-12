@@ -43,6 +43,8 @@ script(type="text/ng-template" id="comment-input-dialog")
 						span.glyphicon.glyphicon-eye-open
 					a.sidebar-button-half.btn.btn-default(ng-href="/download/word/{{currentDocument._id}}", target="_blank")
 						span.glyphicon.glyphicon-file
+				button#new-version.sidebar-button.btn.btn-default(ng-click="newVersion(currentDocument)") Neue Version
+
 					//- a.sidebar-button.btn.btn-default(ng-href="/download/pdf/{{currentDocument._id}}", target="_blank") Download PDF
 					//- 	span.glyphicon.glyphicon-eye-open
 				//- div
