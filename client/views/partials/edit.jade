@@ -65,7 +65,7 @@ script(type="text/ng-template" id="comment-input-dialog")
 
 
 		#edit.no-gutter(ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}")
-			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent', 'addComment']]")
+			text-angular(ng-model="currentChapter.content", ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent'],['addComment']]")
 
 
 		#sidebar.col-md-2(ng-hide="fullscreen")
