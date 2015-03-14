@@ -46,7 +46,7 @@ module.exports = (models) ->
 						version: 1
 				save models.Chapter, chapters, () ->
 					for m in [0..3]
-						documents.push 
+						d = 
 							version: 0
 							key: "#{chance.integer({min: 100000, max: 999999})}"
 							headAuthor: _.sample authors
@@ -56,9 +56,11 @@ module.exports = (models) ->
 								name: chance.name()
 								dob: chance.birthday()
 							state: _.sample ['ONGOING', 'FINISHED']
-					n = 1
-					for d in documents
-						d.number = "#{n}"
-						n += 1
+						documents.push d
+						# add another version
+						dd = _.clone d, true
+						dd.version++
+						documents.push dd
+
 					save models.Document, documents, () ->
 						console.log "FINISHED INSERT FAKEDATA"

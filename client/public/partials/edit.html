@@ -28,6 +28,7 @@
   <div id="doc-info" ng-hide="fullscreen" class="row">
     <div id="doc-number" class="col-md-2">
       <h1>{{ currentDocument.key }}</h1>
+      <h4 class="text-muted">Version: {{ currentDocument.version }}</h4>
     </div>
     <div id="doc-details" class="col-md-10">
       <div class="col-md-8">
@@ -46,8 +47,10 @@
           </label>
         </div>
         <div class="btn-group doc-actions"><a ng-href="/preview/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a><a ng-href="/download/word/{{currentDocument._id}}" target="_blank" class="sidebar-button-half btn btn-default"><span class="glyphicon glyphicon-file"></span></a></div>
-        <button id="new-version" ng-click="newVersion(currentDocument)" class="sidebar-button btn btn-default">Neue Version
-        </button>
+        <div class="btn-group doc-actions">
+          <button ng-click="newVersion(currentDocument)" class="sidebar-button-half btn btn-default">New Version</button>
+          <button ng-click="diff(currentDocument)" class="sidebar-button-half btn btn-default">Diff</button>
+        </div>
       </div>
     </div>
   </div>
@@ -65,7 +68,7 @@
       <button id="new-chapter" ng-click="newChapter(currentDocument)" class="sidebar-button btn btn-default">Neues Kapitel</button>
     </div>
     <div id="edit" ng-class="{'col-md-8': !fullscreen, 'col-md-12': fullscreen}" class="no-gutter">
-      <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent', 'addComment']]"></text-angular>
+      <text-angular ng-model="currentChapter.content" ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','ul','ol','undo','redo','clear'],['justifyLeft','justifyCenter','justifyRight','indent','outdent'],['addComment']]"></text-angular>
     </div>
     <div id="sidebar" ng-hide="fullscreen" class="col-md-2">
       <div class="big-font">Kommentare</div>

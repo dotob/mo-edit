@@ -48,8 +48,5 @@
         "jquery": "*"
       }
     }
-  },
-  "resolutions": {
-    "google-diff-match-patch": "*"
   }
 }
