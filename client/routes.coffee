@@ -22,6 +22,11 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 			templateUrl: 'partials/list.html'
 			controller: 'listController'
 
+		.state 'diff',
+			url: "/diff/:docKey/:leftVersion/:rightVersion"
+			templateUrl: 'partials/diff.html'
+			controller: 'diffController'
+
 
 	$urlRouterProvider.otherwise('/list');
 

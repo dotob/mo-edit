@@ -18,6 +18,14 @@ angular.module('moedit.Services').factory 'moedit.Data', [
 					deferred.resolve response.data
 				deferred.promise
 			
+			documentVersions: (docKey) ->
+				deferred = $q.defer()
+				# TODO: make this more smart
+				@documents().then (documents) ->
+					docsWithKey = _.filter documents, (d) -> d.key == docKey
+					deferred.resolve docsWithKey
+				deferred.promise
+
 			saveDocument: (doc) ->
 				if doc._id?
 					$http.put "/documents/#{doc._id}", doc

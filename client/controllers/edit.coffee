@@ -20,6 +20,7 @@ controllers.controller 'editController', [
 			$scope.saveDocument($scope.currentDocument, "Automatisch gespeichert")
 		
 		autoSave = _.debounce autoSaveCurrentDocument, 5000
+		$scope.commentRemoval = true
 
 		$scope.selectChapter = (chapter) ->
 			$log.info "select chapter #{chapter.title}:#{chapter.selected}"
@@ -74,7 +75,7 @@ controllers.controller 'editController', [
 							removeMe.push comment
 					for r in removeMe
 						$scope.deleteComment r
-					autoSave()	
+				autoSave()	
 
 		$scope.newComment = (chapter, commentKey) ->
 			dialog = ngDialog.open
@@ -143,6 +144,10 @@ controllers.controller 'editController', [
 			delete newDoc._id
 			newDoc.version++
 			$scope.saveDocument newDoc, "Neue Version gespeichert"
+
+		$scope.diff = (document) ->
+			$log.debug "goto diff of #{document.key}"
+			$state.go 'diff' , {docKey: document.key, leftVersion: 0, rightVersion: document.version}
 
 		# fix routing if someone comes here with no or non existing docid
 		if $stateParams.docid

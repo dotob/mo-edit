@@ -10,6 +10,7 @@ app = angular.module('moedit.App', [
 	'moedit.Services'
 	'textAngular'
 	'ui.sortable'
+	'diff-match-patch'
 #  'moedit.Logging'
 ])
 

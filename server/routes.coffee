@@ -12,6 +12,7 @@ module.exports = (app, models, basedir) ->
 		res.sendFile path.join basedir, 'client', 'public', 'index.html'
 	# basic route
 	app.get '/edit/*', sendToClient
+	app.get '/diff/*', sendToClient
 	app.get '/list', sendToClient
 	app.get '/login', sendToClient
 		

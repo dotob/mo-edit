@@ -36,6 +36,23 @@ body {
   left: 50%;
   margin-left: -250px;
 }
+.versionOriginal {
+  width: 100%;
+  height: 250px;
+}
+.ins,
+ins {
+  color: #000;
+  background: #bfb;
+}
+.del,
+del {
+  color: #000;
+  background: #fbb;
+}
+.textdiff {
+  margin-left: 10px;
+}
 .big-font {
   font-size: 24px;
 }
