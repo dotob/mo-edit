@@ -3,11 +3,9 @@ script(type="text/ng-template" id="comment-input-dialog")
 		.row
 			h1 Neuer Kommentar
 		.row
-			form.form-horizontal(role="form")
-				.form-group
-					label.col-md-4.control-label(for="commentText") Kommentar
-					.col-md-6
-						textarea#commentText.form-control(rows="10", cols="50", ng-model="newCommentText")
+			form(role="form")
+				label(for="commentText") Kommentar
+				textarea#commentText.form-control(rows="10", cols="50", ng-model="newCommentText")
 		.row
 			.col-md-6
 				button.detailactionbutton.btn.btn-success(ng-click="closeThisDialog(newCommentText)", ng-disabled="false") Ok

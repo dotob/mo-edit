@@ -135,6 +135,9 @@ del {
   margin-bottom: 5px;
   margin-top: 5px;
 }
+#commentInputDialog {
+  padding: 8px;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;
