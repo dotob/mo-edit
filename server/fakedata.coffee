@@ -39,7 +39,7 @@ module.exports = (models) ->
 						author: _.sample authors
 						number: "#{k}"
 						title: chance.word()
-						content: "#{chance.paragraph()} #{someCommentedText}"
+						content: "#{chance.paragraph()} #{someCommentedText} #{chance.sentence()}"
 						lastChanged: new Date()
 						state: _.sample ['ONGOING', 'FINISHED']
 						comments: aComment

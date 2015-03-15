@@ -71,10 +71,12 @@ controllers.controller 'editController', [
 				if $scope.commentRemoval
 					removeMe = []
 					for comment in $scope.currentChapter.comments
-						if newValue.indexOf(comment.key) < 0
+						idx = newValue.indexOf(comment.key)
+						if idx < 0
 							removeMe.push comment
+							$log.debug "remove comment #{comment.text}"
 					for r in removeMe
-						$scope.deleteComment r
+						_.remove($scope.currentChapter.comments, (c) -> c.key == r.key)
 				autoSave()	
 
 		$scope.newComment = (chapter, commentKey) ->
@@ -122,11 +124,11 @@ controllers.controller 'editController', [
 			r = new RegExp rgx
 			console.log "before: #{$scope.currentChapter.content}"
 			m = $scope.currentChapter.content.match r
-			console.dir m
-			$scope.currentChapter.content = $scope.currentChapter.content.replace r, m[1], 'g'
-			console.log "after : #{$scope.currentChapter.content}"
-			_.remove($scope.currentChapter.comments, (c) -> c.key == comment.key)
-			autoSave()
+			if m[1]?
+				$scope.currentChapter.content = $scope.currentChapter.content.replace r, m[1], 'g'
+				console.log "after : #{$scope.currentChapter.content}"
+				_.remove($scope.currentChapter.comments, (c) -> c.key == comment.key)
+				autoSave()
 
 		$scope.editComment = (comment) -> 
 			$scope.newCommentText = comment.text
