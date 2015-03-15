@@ -5,17 +5,35 @@ controllers.controller 'listController', [
 	'$q'
 	'$state'
 	'$window'
+	'ngDialog'
+	'messageCenterService'
 	'moedit.Socket'
 	'moedit.SweetAlert'
 	'moedit.Focus'
 	'moedit.Data'
-	($scope, $log, $q, $state, $window, Socket, SweetAlert, Focus, Data) ->
+	($scope, $log, $q, $state, $window, ngDialog, messageCenterService, Socket, SweetAlert, Focus, Data) ->
 
 		$scope.newDocument = () ->
-			SweetAlert.info 'kommt noch'
+			dialog = ngDialog.open
+				template: 'new-opinion-dialog'
+				scope: $scope
+			dialog.closePromise.then (dialogData) ->
+				console.log "typ: #{dialogData.value}"
+				Data.documents().then (documents) ->
+					aDoc = _.first documents
+					delete aDoc._id
+					aDoc.key = chance.guid()
+					aDoc.title = chance.word()
+					Data.saveDocument(aDoc).then (response) ->
+						if response.status != 200
+							messageCenterService.add('danger', "Fehler beim Speichern", {html: true});
+						else
+							messageCenterService.add('success', "Dokument <strong>#{document.title}</strong> erfolgreich angelegt", {timeout: 2000, html: true});
+							getAllDocuments()
 
 		$scope.deleteDocument = (document) ->
 			Data.deleteDocument(document).then (i) ->
+				messageCenterService.add('success', "Dokument <strong>#{document.title}</strong> erfolgreich gelöscht", {timeout: 2000, html: true});
 				getAllDocuments()
 
 		$scope.openDocument = (document) ->

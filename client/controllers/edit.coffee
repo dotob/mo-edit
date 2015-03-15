@@ -110,7 +110,7 @@ controllers.controller 'editController', [
 		$scope.saveDocument = (document, msg = "Gutachten erfolgreich gespeichert") ->
 			Data.saveDocument(document).then (response) ->
 				if response.status != 200
-					messageCenterService.add('danger', msg, {html: true});
+					messageCenterService.add('danger', "Fehler beim Speichern", {html: true});
 				else
 					messageCenterService.add('success', msg, {timeout: 2000, html: true});
 
