@@ -35,6 +35,12 @@ controllers.controller 'editController', [
 				else
 					c.selected = false
 			$scope.chapterWatch = $scope.$watch 'currentChapter.content', chapterchange, true
+			Data.hasPreviousVersion($scope.currentDocument).then (hasOne) ->
+				console.log "has pv: #{hasOne}"
+				$scope.hasPreviousVersion = hasOne
+			Data.hasNextVersion($scope.currentDocument).then (hasOne) ->
+				console.log "has nv: #{hasOne}"
+				$scope.hasNextVersion = hasOne
 
 		$scope.selectComment = (comment) ->
 			unhighlightComment($scope.currentComment)
@@ -146,6 +152,14 @@ controllers.controller 'editController', [
 			delete newDoc._id
 			newDoc.version++
 			$scope.saveDocument newDoc, "Neue Version gespeichert"
+
+		$scope.previousVersion = () ->
+			Data.getPreviousVersion($scope.currentDocument).then (document) ->
+				$state.go 'edit', { docid: document._id }
+		
+		$scope.nextVersion = () ->
+			Data.getNextVersion($scope.currentDocument).then (document) ->
+				$state.go 'edit', { docid: document._id }
 
 		$scope.diff = (document) ->
 			$log.debug "goto diff of #{document.key}"

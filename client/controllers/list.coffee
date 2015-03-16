@@ -22,7 +22,7 @@ controllers.controller 'listController', [
 				Data.documents().then (documents) ->
 					aDoc = _.first documents
 					delete aDoc._id
-					aDoc.key = chance.guid()
+					aDoc.key = "#{chance.integer({min: 100000, max: 999999})}"
 					aDoc.title = chance.word()
 					Data.saveDocument(aDoc).then (response) ->
 						if response.status != 200

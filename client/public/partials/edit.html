@@ -24,7 +24,7 @@
   <div id="doc-info" ng-hide="fullscreen" class="row">
     <div id="doc-number" class="col-md-2">
       <h1>{{ currentDocument.key }}</h1>
-      <h4 class="text-muted">Version: {{ currentDocument.version }}</h4>
+      <h4 class="text-muted">Version: <a ng-click="previousVersion()" ng-disabled="!hasPreviousVersion" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-backward"></span></a><span> {{ currentDocument.version }} </span><a ng-click="nextVersion()" ng-disabled="!hasNextVersion" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-forward"></span></a></h4>
     </div>
     <div id="doc-details" class="col-md-10">
       <div class="col-md-8">

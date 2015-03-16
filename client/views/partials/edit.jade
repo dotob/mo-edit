@@ -19,7 +19,12 @@ script(type="text/ng-template" id="comment-input-dialog")
 	#doc-info.row(ng-hide="fullscreen")
 		#doc-number.col-md-2
 			h1 {{ currentDocument.key }}
-			h4.text-muted Version: {{ currentDocument.version }}
+			h4.text-muted Version: 
+				a.btn.btn-default.btn-xs(ng-click="previousVersion()", ng-disabled="!hasPreviousVersion")
+					span.glyphicon.glyphicon-backward
+				span  {{ currentDocument.version }} 
+				a.btn.btn-default.btn-xs(ng-click="nextVersion()", ng-disabled="!hasNextVersion")
+					span.glyphicon.glyphicon-forward
 
 		#doc-details.col-md-10
 			.col-md-8
