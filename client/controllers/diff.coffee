@@ -25,8 +25,8 @@ controllers.controller 'diffController', [
 				rv = parseInt $stateParams.rightVersion
 				$scope.leftVersionDocument = _.find documents, (d) -> d.version == lv
 				$scope.rightVersionDocument = _.find documents, (d) -> d.version == rv
-				$scope.left = $scope.content $scope.leftVersionDocument
-				$scope.right = $scope.content $scope.rightVersionDocument
+				$scope.left = $scope.cleanContent $scope.leftVersionDocument
+				$scope.right = $scope.cleanContent $scope.rightVersionDocument
 		else
 			$state.go 'list'
 ]
