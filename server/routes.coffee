@@ -78,7 +78,7 @@ module.exports = (app, models, basedir) ->
 				dbdoc.remove (err) ->
 					if err?
 						console.log "error while saving: #{err}"
+						res.sendStatus(500)
 					else
 						console.log "successfully removed doc: #{req.params.docid}"
-
-
+						res.sendStatus(200)

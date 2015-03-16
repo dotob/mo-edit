@@ -2,16 +2,20 @@ script(type="text/ng-template" id="new-opinion-dialog")
 	#newOpinionDialog
 		.row
 			h1 Neues Gutachten
-		.row.center-block
-			.col-md-3.jumbotron.opinion-type
-				h2.type-name Typ 1
-				button.type-button.btn.btn-success(ng-click="closeThisDialog('1')") Anlegen
-			.col-md-3.jumbotron.opinion-type
-				h2.type-name Typ 2
-				button.type-button.btn.btn-success(ng-click="closeThisDialog('2')") Anlegen
-			.col-md-3.jumbotron.opinion-type
-				h2.type-name Typ 3
-				button.type-button.btn.btn-success(ng-click="closeThisDialog('3')") Anlegen
+		
+		.row
+			.col-md-4
+				.opinion-type
+					h2.type-name Typ 1
+					button.type-button.btn.btn-success(ng-click="closeThisDialog('1')") Anlegen
+			.col-md-4
+				.opinion-type
+					h2.type-name Typ 2
+					button.type-button.btn.btn-success(ng-click="closeThisDialog('2')") Anlegen
+			.col-md-4
+				.opinion-type
+					h2.type-name Typ 3
+					button.type-button.btn.btn-success(ng-click="closeThisDialog('3')") Anlegen
 
 		.row
 			.col-md-12

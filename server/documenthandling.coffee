@@ -49,8 +49,9 @@ DocumentHandling = class DocumentHandling
 	createHtml: (doc) ->
 		html = @header
 		html += "<h1>#{doc.title}</h1>\n\n"
+		i = 1
 		for chapter in doc.chapters
-			html += "<h2>#{chapter.title}</h2>\n\n"
+			html += "<h2>#{i++}. #{chapter.title}</h2>\n\n"
 			html += "<p>#{chapter.content}</p>\n\n"
 		html += @footer
 		html
